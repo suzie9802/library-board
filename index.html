@@ -212,6 +212,17 @@
     word-break: keep-all;
   }
   .meta .dot { color: #c9c3b8; margin: 0 3px; }
+  .shelf-loc {
+    display: inline-flex; align-items: center; gap: 4px; align-self: flex-start;
+    max-width: 100%; padding: 3px 7px; border-radius: 7px;
+    font-size: 10.5px; font-weight: 700; line-height: 1.25; letter-spacing: -.02em;
+    color: var(--ink-soft); background: #f4f1ea; border: 1px solid #e7e1d5;
+    word-break: keep-all;
+  }
+  .shelf-loc.is-avail {
+    color: #166534; background: #eaf7ee; border-color: #b7e1c4; font-weight: 800;
+  }
+  .shelf-loc .call-code { font-variant-numeric: tabular-nums; }
 
   .foot { display: flex; align-items: stretch; gap: 5px; margin-top: 1px; }
   .read-btn {
@@ -475,8 +486,17 @@
     var bits = [];
     if (book.author) bits.push(book.author);
     if (book.publisher) bits.push(book.publisher + (book.year ? " " + book.year : ""));
-    if (book.callNo) bits.push(book.callNo);
+    if (!book.callNo && book.shelf && book.status !== "notheld") bits.push(book.shelf);
     return bits.join(" · ");
+  }
+
+  function shelfLocHTML(book) {
+    if (!book.callNo) return "";
+    var parts = [];
+    if (book.shelf) parts.push(book.shelf);
+    parts.push(book.callNo);
+    var cls = "shelf-loc" + (book.status === "available" ? " is-avail" : "");
+    return '<div class="' + cls + '"><span>📍</span><span class="call-code">' + esc(parts.join(" · ")) + "</span></div>";
   }
 
   /* ---------------- render ---------------- */
@@ -657,6 +677,7 @@
       + '<div class="body">'
       +   '<div class="title-row"><h3>' + esc(b.title) + "</h3>" + badgeHTML(b) + "</div>"
       +   '<p class="meta" title="' + esc(b.title + " · " + metaLine(b)) + '">' + esc(metaLine(b)) + "</p>"
+      +   shelfLocHTML(b)
       +   '<div class="foot">'
       +     '<button class="read-btn' + (read ? " is-read" : "") + '" type="button" data-read="' + esc(b.id) + '" '
       +       'aria-pressed="' + read + '">' + (read ? "✔ 읽음" : "읽음 표시") + "</button>"
