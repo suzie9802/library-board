@@ -201,7 +201,7 @@
     white-space: nowrap; letter-spacing: -.02em; margin-top: 1px;
   }
   .badge.borrowed { color: var(--blue);   background: var(--blue-bg); }
-  .badge.reserved { color: var(--amber);  background: var(--amber-bg); }
+  .badge.reserved, .badge.loaned_other { color: var(--amber);  background: var(--amber-bg); }
   .badge.ill      { color: var(--violet); background: var(--violet-bg); }
   .badge.available{ color: var(--green);  background: var(--green-bg); }
   .badge.notheld  { color: var(--red);    background: var(--red-bg); }
@@ -454,27 +454,29 @@
     clearTimeout(toast._t);
     toast._t = setTimeout(function () { t.classList.remove("is-on"); }, 1900);
   }
-  function isRead(book) { return state.read[book.id] === true; }
-  function isWaiting(book) { return book.status === "reserved" || book.status === "ill"; }
+  function isRead(book) { return book.read === true || state.read[book.id] === true; }
+  function isWaiting(book) { return book.status === "reserved" || book.status === "ill" || book.status === "loaned_other"; }
   function shortTitle(t) {
     return String(t).replace(/^\[CD\]/, "").replace(/^\((?:The|A)\)/, "").trim();
   }
 
   /* ---------------- status badge ---------------- */
   function badgeText(book) {
-    if (book.status === "borrowed")  return "📖 " + ddayText(book.dueDate);
-    if (book.status === "reserved")  return "⏳ 예약 " + book.reserveRank + "순위";
-    if (book.status === "ill")       return "🚚 상호대차 " + book.illState;
-    if (book.status === "available") return "✅ 비치중";
-    if (book.status === "notheld")   return "❌ 미소장";
+    if (book.status === "borrowed")     return "📖 " + ddayText(book.dueDate);
+    if (book.status === "reserved")     return "⏳ 예약 " + book.reserveRank + "순위";
+    if (book.status === "loaned_other") return "⏳ 대출중" + (book.dueDate ? " (" + koDate(book.dueDate) + ")" : "");
+    if (book.status === "ill")          return "🚚 상호대차 " + book.illState;
+    if (book.status === "available")    return "✅ 비치중";
+    if (book.status === "notheld")      return "❌ 미소장";
     return "";
   }
   function badgeTitle(book) {
-    if (book.status === "borrowed")  return "빌리는 중 · 반납 " + koDate(book.dueDate) + " (" + ddayText(book.dueDate) + ")";
-    if (book.status === "reserved")  return "예약 " + book.reserveRank + "순위 · 앞 대출자 반납 " + koDate(book.dueDate);
-    if (book.status === "ill")       return "상호대차 " + book.illState + " (" + book.illFrom + " → " + book.illTo + ")";
-    if (book.status === "available") return "정약용도서관 비치중 · 방문 대출만 가능";
-    if (book.status === "notheld")   return "남양주시 도서관 미소장";
+    if (book.status === "borrowed")     return "빌리는 중 · 반납 " + koDate(book.dueDate) + " (" + ddayText(book.dueDate) + ")";
+    if (book.status === "reserved")     return "예약 " + book.reserveRank + "순위 · 앞 대출자 반납 " + koDate(book.dueDate);
+    if (book.status === "loaned_other") return "정약용도서관 대출중 · 예약 신청 가능" + (book.dueDate ? " (반납예정 " + koDate(book.dueDate) + ")" : "");
+    if (book.status === "ill")          return "상호대차 " + book.illState + " (" + book.illFrom + " → " + book.illTo + ")";
+    if (book.status === "available")    return "정약용도서관 비치중 · 방문 대출만 가능";
+    if (book.status === "notheld")      return "남양주시 도서관 미소장";
     return "";
   }
   function badgeHTML(book) {
@@ -619,6 +621,7 @@
     var t = searchTitle(book);
     switch (book.status) {
       case "reserved":
+      case "loaned_other":
         return { label: "📋 예약 복사", text: "정약용도서관에서 『" + t + "』 예약 신청해 줘" };
       case "ill":
         return { label: "📋 상호대차 복사", text: "정약용도서관에서 『" + t + "』 상호대차 신청해 줘" };
