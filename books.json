@@ -15,7 +15,8 @@
       "callNo": "원서 808.9-스875헬-3-8",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-popcorn-shop.jpg"
     },
     {
       "id": "loan-pony-mysteries",
@@ -29,7 +30,8 @@
       "callNo": "원서 808.9-스875헬-3-9",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-pony-mysteries.jpg"
     },
     {
       "id": "loan-boy-named-boomer",
@@ -43,7 +45,8 @@
       "callNo": "원서 808.9-스875헬-3-18",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-boy-named-boomer.jpg"
     },
     {
       "id": "loan-haetsal-annyeong",
@@ -57,7 +60,8 @@
       "callNo": "유아 808.9-북17무-76",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-haetsal-annyeong.jpg"
     },
     {
       "id": "loan-walt-disney-cd",
@@ -71,7 +75,8 @@
       "callNo": "",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-walt-disney-cd.jpg"
     },
     {
       "id": "loan-ne-neukkim",
@@ -85,7 +90,8 @@
       "callNo": "아동 199-불15우-20",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-ne-neukkim.jpg"
     },
     {
       "id": "loan-don-namu",
@@ -99,7 +105,8 @@
       "callNo": "유아 843-매874돈",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-don-namu.jpg"
     },
     {
       "id": "loan-duri-hamkke",
@@ -113,7 +120,8 @@
       "callNo": "유아 883-칼298둘",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-duri-hamkke.jpg"
     },
     {
       "id": "loan-walt-disney",
@@ -127,7 +135,8 @@
       "callNo": "원서 990.8-그295ㅎ-35",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-walt-disney.jpg"
     },
     {
       "id": "loan-yaedeul-hakgyo",
@@ -141,7 +150,8 @@
       "callNo": "아동 336.24-사14일-8",
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "cover": "covers/loan-yaedeul-hakgyo.jpg"
     },
     {
       "id": "req-dapanda-3",
@@ -157,7 +167,8 @@
       "requestedAt": "2026-11-17",
       "reserveRank": 2,
       "reserveQueue": 2,
-      "dueDate": "2026-11-22"
+      "dueDate": "2026-11-22",
+      "cover": "covers/req-dapanda-3.jpg"
     },
     {
       "id": "req-oegyein",
@@ -173,7 +184,8 @@
       "requestedAt": "2026-11-17",
       "illFrom": "오남도서관",
       "illTo": "정약용도서관",
-      "illState": "발송"
+      "illState": "발송",
+      "cover": "covers/req-oegyein.jpg"
     },
     {
       "id": "req-nae-cake",
@@ -185,7 +197,8 @@
       "category": "그림책",
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 808.9-북17꿈-87",
-      "status": "available"
+      "status": "available",
+      "cover": "covers/req-nae-cake.jpg"
     },
     {
       "id": "req-ttokttok-1",
@@ -197,7 +210,8 @@
       "category": "초등 입학",
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 375.2-문94똑",
-      "status": "available"
+      "status": "available",
+      "cover": "covers/req-ttokttok-1.jpg"
     },
     {
       "id": "req-ddong-naemsae",
@@ -210,7 +224,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "isbn": "9791175140325"
+      "isbn": "9791175140325",
+      "cover": "covers/req-ddong-naemsae.jpg"
     }
   ]
 }

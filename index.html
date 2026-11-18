@@ -24,7 +24,7 @@
     --violet: #6d28d9; --violet-bg: #f3eeff;
     --green: #15803d;  --green-bg: #eafaf0;
     --red: #b91c1c;    --red-bg: #fdeeee;
-    --shadow: 0 1px 2px rgba(31,36,48,.05), 0 6px 18px rgba(31,36,48,.05);
+    --shadow: 0 1px 2px rgba(31,36,48,.05), 0 6px 16px rgba(31,36,48,.05);
     --radius: 16px;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -35,210 +35,251 @@
     color: var(--ink);
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
                  "Malgun Gothic", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
-    line-height: 1.5;
+    line-height: 1.45;
     -webkit-font-smoothing: antialiased;
-    padding: 0 0 calc(28px + env(safe-area-inset-bottom));
+    padding: 0 0 calc(24px + env(safe-area-inset-bottom));
   }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
 
   /* ---------- header ---------- */
   header {
     position: sticky; top: 0; z-index: 30;
-    background: #f7f5f0;
+    background: rgba(247,245,240,.94);
+    -webkit-backdrop-filter: saturate(150%) blur(8px);
+    backdrop-filter: saturate(150%) blur(8px);
     border-bottom: 1px solid var(--line);
-    padding: calc(10px + env(safe-area-inset-top)) 0 10px;
+    padding: calc(8px + env(safe-area-inset-top)) 0 8px;
   }
   .head-in { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-  .brand h1 { font-size: 18px; margin: 0; letter-spacing: -.02em; }
-  .brand p { margin: 2px 0 0; font-size: 11.5px; color: var(--ink-faint); }
+  .brand h1 { font-size: 16.5px; margin: 0; letter-spacing: -.02em; line-height: 1.2; }
+  .brand p { margin: 2px 0 0; font-size: 10.5px; color: var(--ink-faint); }
   .lib-badge {
-    flex: 0 0 auto; font-size: 11.5px; font-weight: 700; color: var(--accent);
-    background: var(--accent-soft); border-radius: 999px; padding: 6px 10px; white-space: nowrap;
+    flex: 0 0 auto; font-size: 11px; font-weight: 700; color: var(--accent);
+    background: var(--accent-soft); border-radius: 999px; padding: 5px 9px; white-space: nowrap;
   }
 
-  /* ---------- progress hero ---------- */
-  .hero {
-    margin-top: 16px; background: var(--card); border-radius: var(--radius);
-    padding: 18px 18px 16px; box-shadow: var(--shadow); border: 1px solid #f0ece4;
+  /* ---------- compact summary ---------- */
+  .sum {
+    margin-top: 12px; background: var(--card); border-radius: var(--radius);
+    padding: 11px 13px 12px; box-shadow: var(--shadow); border: 1px solid #f0ece4;
   }
-  .hero-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
-  .hero-label { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); letter-spacing: -.01em; }
-  .hero-pct { font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; color: var(--accent); }
-  .hero-pct span { font-size: 16px; font-weight: 700; margin-left: 2px; }
-  .hero-count { text-align: right; font-size: 13px; color: var(--ink-soft); padding-bottom: 4px; }
-  .hero-count b { font-size: 17px; color: var(--ink); }
-  .bar { height: 12px; border-radius: 999px; background: #efece5; margin-top: 12px; overflow: hidden; }
+  .sum-top { display: flex; align-items: center; gap: 11px; }
+  .sum-pct {
+    flex: 0 0 auto; font-size: 26px; font-weight: 800; letter-spacing: -.035em;
+    line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums;
+  }
+  .sum-pct span { font-size: 12px; font-weight: 700; margin-left: 1px; }
+  .sum-mid { flex: 1 1 auto; min-width: 0; }
+  .sum-label { font-size: 11px; font-weight: 700; color: var(--ink-soft); letter-spacing: -.01em; }
+  .bar { height: 8px; border-radius: 999px; background: #efece5; margin-top: 5px; overflow: hidden; }
   .bar > i {
-    display: block; height: 100%; width: 0;
-    border-radius: 999px;
+    display: block; height: 100%; width: 0; border-radius: 999px;
     background: linear-gradient(90deg, #3f8b76, #2f6f5e);
     transition: width .45s cubic-bezier(.2,.8,.2,1);
   }
-  .hero-note { margin: 10px 0 0; font-size: 12px; color: var(--ink-faint); }
+  .sum-count {
+    flex: 0 0 auto; text-align: right; font-size: 11px; color: var(--ink-faint);
+    line-height: 1.25; font-variant-numeric: tabular-nums;
+  }
+  .sum-count b { display: block; font-size: 15px; color: var(--ink); font-weight: 800; }
 
-  /* ---------- stat grid ---------- */
-  .stats {
-    display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 10px; margin-top: 12px;
-  }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 6px; margin-top: 10px; }
   .stat {
-    background: var(--card); border: 1px solid #f0ece4; border-radius: 14px;
-    padding: 12px 13px; box-shadow: var(--shadow); cursor: pointer;
-    display: flex; flex-direction: column; gap: 2px; text-align: left;
-    font-family: inherit; color: inherit;
-    touch-action: manipulation; transition: transform .12s ease, border-color .12s ease;
+    background: #fbfaf7; border: 1px solid #efece4; border-radius: 11px;
+    padding: 6px 4px 5px; cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; gap: 0; text-align: center; font-family: inherit; color: inherit;
+    touch-action: manipulation; transition: transform .12s ease, border-color .12s ease, background .12s ease;
   }
-  .stat:active { transform: scale(.98); }
-  .stat .k { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); display: flex; align-items: center; gap: 5px; }
-  .stat .v { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
-  .stat .v small { font-size: 12px; font-weight: 700; color: var(--ink-faint); margin-left: 2px; }
-  .stat.is-on { border-color: #cfd8d3; box-shadow: 0 0 0 2px rgba(47,111,94,.12), var(--shadow); }
+  .stat:active { transform: scale(.97); }
+  .stat .v { font-size: 17px; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+  .stat .k { font-size: 9.5px; font-weight: 700; color: var(--ink-faint); white-space: nowrap; letter-spacing: -.02em; }
+  .stat.is-on { border-color: #bcd2c9; background: var(--accent-soft); }
+  .stat.is-on .k { color: var(--accent); }
   .s-borrow .v { color: var(--blue); }
   .s-wait .v { color: var(--amber); }
   .s-shelf .v { color: var(--green); }
   .s-none .v { color: var(--red); }
 
-  /* ---------- upcoming ---------- */
-  .upcoming {
-    margin-top: 12px; background: var(--card); border: 1px solid #f0ece4;
-    border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow);
+  /* ---------- 챙길 일 (slim banner) ---------- */
+  .peek {
+    margin-top: 8px; background: var(--card); border: 1px solid #f0ece4;
+    border-radius: 12px; box-shadow: var(--shadow); overflow: hidden;
   }
-  .upcoming h2 { font-size: 13px; margin: 0 0 8px; color: var(--ink-soft); letter-spacing: -.01em; }
-  .upcoming ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
-  .upcoming li { font-size: 13px; color: var(--ink); display: flex; gap: 8px; align-items: baseline; }
-  .upcoming li em { font-style: normal; font-weight: 700; color: var(--ink-soft); flex: 0 0 auto; min-width: 78px; font-size: 12px; }
+  .peek-head {
+    width: 100%; display: flex; align-items: center; gap: 8px;
+    background: none; border: 0; font: inherit; color: inherit; cursor: pointer;
+    padding: 9px 12px; text-align: left; touch-action: manipulation;
+  }
+  .peek-title { font-size: 12px; font-weight: 800; color: var(--ink-soft); flex: 0 0 auto; }
+  .peek-sum {
+    flex: 1 1 auto; min-width: 0; font-size: 11.5px; color: var(--ink-faint);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .peek-sum b { color: var(--ink-soft); font-weight: 700; }
+  .peek-arrow { flex: 0 0 auto; font-size: 10px; color: var(--ink-faint); transition: transform .18s ease; }
+  .peek.is-open .peek-arrow { transform: rotate(180deg); }
+  .peek ul { list-style: none; margin: 0; padding: 0 12px 10px; display: grid; gap: 6px; }
+  .peek li { font-size: 12px; color: var(--ink); display: flex; gap: 8px; align-items: baseline; }
+  .peek li em {
+    font-style: normal; font-weight: 700; color: var(--ink-soft); flex: 0 0 auto;
+    min-width: 74px; font-size: 11px;
+  }
+  .peek li span { word-break: keep-all; }
 
   /* ---------- controls ---------- */
-  .controls { margin-top: 18px; position: sticky; top: var(--headerH, 58px); z-index: 20;
-    scroll-margin-top: calc(var(--headerH, 58px) + 8px);
-    background: var(--bg); padding-bottom: 8px;
-    box-shadow: 0 10px 12px -12px rgba(31,36,48,.16); }
-  .chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .controls {
+    margin-top: 10px; position: sticky; top: var(--headerH, 54px); z-index: 20;
+    scroll-margin-top: calc(var(--headerH, 54px) + 8px);
+    background: var(--bg); padding-bottom: 7px;
+    box-shadow: 0 10px 12px -12px rgba(31,36,48,.18);
+  }
+  .chips { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 5px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .chips::-webkit-scrollbar { display: none; }
   .chip {
     flex: 0 0 auto; border: 1px solid var(--line); background: #fff; color: var(--ink-soft);
-    font: inherit; font-size: 13px; font-weight: 700; padding: 9px 13px; border-radius: 999px;
+    font: inherit; font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 999px;
     cursor: pointer; white-space: nowrap; touch-action: manipulation;
     transition: background .15s ease, color .15s ease, border-color .15s ease;
   }
-  .chip b { font-weight: 800; margin-left: 4px; }
+  .chip b { font-weight: 800; margin-left: 3px; font-variant-numeric: tabular-nums; }
   .chip.is-on { background: var(--ink); color: #fff; border-color: var(--ink); }
   .chip.is-on b { color: #fff; }
   .chip:active { transform: scale(.97); }
 
-  .search { position: relative; margin-top: 4px; }
+  .search { position: relative; margin-top: 2px; }
   .search input {
     width: 100%; font: inherit; font-size: 16px; color: var(--ink);
-    padding: 12px 42px 12px 14px; border-radius: 12px;
+    padding: 9px 40px 9px 13px; border-radius: 11px;
     border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow);
     -webkit-appearance: none; appearance: none;
   }
   .search input:focus { outline: none; border-color: #b9c9c2; box-shadow: 0 0 0 3px rgba(47,111,94,.12); }
   .search .clear {
-    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
-    width: 34px; height: 34px; border: 0; border-radius: 50%; background: #f1eee8;
-    color: var(--ink-soft); font-size: 16px; line-height: 1; cursor: pointer; display: none;
+    position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+    width: 30px; height: 30px; border: 0; border-radius: 50%; background: #f1eee8;
+    color: var(--ink-soft); font-size: 14px; line-height: 1; cursor: pointer; display: none;
   }
   .search .clear.is-on { display: block; }
 
   /* ---------- book list ---------- */
-  .list-head { display: flex; align-items: baseline; justify-content: space-between; margin: 14px 2px 8px; }
-  .list-head p { margin: 0; font-size: 12.5px; color: var(--ink-faint); font-weight: 700; }
-  .books { display: grid; gap: 10px; }
-  @media (min-width: 700px) { .books { grid-template-columns: 1fr 1fr; } }
+  .list-head { display: flex; align-items: baseline; justify-content: space-between; margin: 8px 2px 6px; }
+  .list-head p { margin: 0; font-size: 11.5px; color: var(--ink-faint); font-weight: 700; }
+  .books { display: grid; gap: 7px; }
+  @media (min-width: 760px) { .books { grid-template-columns: 1fr 1fr; gap: 9px; } }
 
   .book {
-    background: var(--card); border: 1px solid #f0ece4; border-radius: var(--radius);
-    padding: 14px 15px 13px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 9px;
+    background: var(--card); border: 1px solid #f0ece4; border-radius: 13px;
+    padding: 9px 11px 9px 9px; box-shadow: var(--shadow);
+    display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; align-items: start;
   }
   .book.read { background: #fbfdfb; border-color: #dfeae3; }
-  .book-top { display: flex; gap: 8px; align-items: flex-start; justify-content: space-between; }
+
+  .cover {
+    position: relative; width: 56px; height: 80px; border-radius: 7px; overflow: hidden;
+    background: #eeeae2; box-shadow: 0 1px 3px rgba(31,36,48,.14); flex: 0 0 auto;
+  }
+  .cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .cover .fb {
+    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between;
+    padding: 5px 4px; background: linear-gradient(160deg, #eef3f0, #e4ddd0);
+    color: #4a5262; font-size: 8px; line-height: 1.25; text-align: center;
+  }
+  .cover .fb b { font-size: 8.5px; font-weight: 800; letter-spacing: -.03em; overflow: hidden; }
+  .cover .fb i { font-style: normal; font-size: 7px; color: #7b8494; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+  .body { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .title-row { display: flex; align-items: flex-start; gap: 6px; }
+  .book h3 {
+    flex: 1 1 auto; min-width: 0; font-size: 13.5px; margin: 0; line-height: 1.32;
+    letter-spacing: -.01em; word-break: keep-all; font-weight: 800;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
   .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 11.5px; font-weight: 800; padding: 5px 9px; border-radius: 999px; white-space: nowrap;
+    flex: 0 0 auto; display: inline-flex; align-items: center; gap: 3px;
+    font-size: 10px; font-weight: 800; padding: 3px 6px; border-radius: 999px;
+    white-space: nowrap; letter-spacing: -.02em; margin-top: 1px;
   }
   .badge.borrowed { color: var(--blue);   background: var(--blue-bg); }
   .badge.reserved { color: var(--amber);  background: var(--amber-bg); }
   .badge.ill      { color: var(--violet); background: var(--violet-bg); }
   .badge.available{ color: var(--green);  background: var(--green-bg); }
   .badge.notheld  { color: var(--red);    background: var(--red-bg); }
-  .badge.dday { color: var(--blue); background: var(--blue-bg); }
-  .tag {
-    font-size: 11px; font-weight: 700; color: var(--ink-faint);
-    border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; white-space: nowrap;
-  }
-  .book h3 { font-size: 15.5px; margin: 0; line-height: 1.34; letter-spacing: -.01em; word-break: keep-all; }
-  .book .meta { font-size: 12.5px; color: var(--ink-soft); margin: 0; word-break: keep-all; }
-  .book .meta .dot { color: #c9c3b8; margin: 0 4px; }
-  .book .call { font-size: 11.5px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
-  .book .state-line { font-size: 11.5px; color: var(--ink-faint); margin: -2px 0 0; text-align: right; }
-  .book-foot { display: flex; align-items: stretch; gap: 8px; margin-top: 4px; }
-  .read-btn { flex: 1 1 0; min-width: 0; }
-  .copy-btn {
-    flex: 1 1 0; min-width: 0; min-height: 40px; padding: 0 10px; border-radius: 11px; cursor: pointer;
-    border: 1px solid #cfd8d3; background: #f4f9f7; color: var(--accent);
-    font: inherit; font-size: 12.5px; font-weight: 800; touch-action: manipulation;
-    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+
+  .meta {
+    margin: 0; font-size: 10.5px; color: var(--ink-faint); line-height: 1.35;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    transition: background .15s ease, transform .1s ease;
   }
-  .copy-btn:active { transform: scale(.97); }
-  .copy-btn:focus-visible { outline: 3px solid rgba(47,111,94,.25); outline-offset: 2px; }
-  .lib-link {
-    display: flex; align-items: center; justify-content: center; gap: 5px;
-    min-height: 38px; margin-top: 1px; border-radius: 11px; text-decoration: none;
-    border: 1px dashed var(--line); color: var(--ink-soft); background: #fdfcf9;
-    font-size: 12.5px; font-weight: 700; touch-action: manipulation;
-  }
-  .lib-link:active { background: #f4f1ea; }
+  .meta .dot { color: #c9c3b8; margin: 0 3px; }
+
+  .foot { display: flex; align-items: stretch; gap: 5px; margin-top: 1px; }
   .read-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-    min-height: 40px; padding: 0 14px; border-radius: 11px; cursor: pointer;
+    flex: 1.15 1 0; min-width: 0; min-height: 28px; padding: 0 8px; border-radius: 8px; cursor: pointer;
     border: 1px solid var(--line); background: #fff; color: var(--ink-soft);
-    font: inherit; font-size: 13px; font-weight: 800; touch-action: manipulation;
+    font: inherit; font-size: 11px; font-weight: 800; touch-action: manipulation;
+    display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+    white-space: nowrap; overflow: hidden;
     transition: background .15s ease, color .15s ease, border-color .15s ease, transform .1s ease;
   }
   .read-btn:active { transform: scale(.97); }
-  .read-btn:focus-visible { outline: 3px solid rgba(47,111,94,.25); outline-offset: 2px; }
   .read-btn.is-read { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .book .sub { font-size: 11.5px; color: var(--ink-faint); text-align: right; }
+  .copy-btn {
+    flex: 1.15 1 0; min-width: 0; min-height: 28px; padding: 0 8px; border-radius: 8px; cursor: pointer;
+    border: 1px solid #cfd8d3; background: #f4f9f7; color: var(--accent);
+    font: inherit; font-size: 11px; font-weight: 800; touch-action: manipulation;
+    display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+    white-space: nowrap; overflow: hidden;
+    transition: background .15s ease, transform .1s ease;
+  }
+  .copy-btn:active { transform: scale(.97); }
+  .lib-link {
+    flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+    min-height: 28px; padding: 0 9px; border-radius: 8px; text-decoration: none;
+    border: 1px solid var(--line); color: var(--ink-soft); background: #fdfcf9;
+    font-size: 11px; font-weight: 800; touch-action: manipulation; white-space: nowrap;
+  }
+  .lib-link:active { background: #f4f1ea; }
+  .read-btn:focus-visible, .copy-btn:focus-visible, .lib-link:focus-visible, .chip:focus-visible,
+  .stat:focus-visible, .peek-head:focus-visible, .tool:focus-visible {
+    outline: 3px solid rgba(47,111,94,.28); outline-offset: 2px;
+  }
+
   .rule-note {
-    margin: 16px 0 0; padding: 12px 14px; border-radius: 12px;
+    margin: 14px 0 0; padding: 11px 13px; border-radius: 12px;
     background: #fffdf7; border: 1px solid #f0e7d2; color: #7a6636;
-    font-size: 11.5px; line-height: 1.65;
+    font-size: 11px; line-height: 1.6;
   }
   .rule-note b { color: #5f4f26; }
 
   .empty {
-    text-align: center; color: var(--ink-faint); font-size: 13.5px;
+    text-align: center; color: var(--ink-faint); font-size: 13px;
     background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius);
-    padding: 34px 16px; margin-top: 4px;
+    padding: 30px 16px; margin-top: 4px;
   }
 
   /* ---------- footer ---------- */
-  footer { margin-top: 26px; }
-  .tools { display: flex; gap: 8px; flex-wrap: wrap; }
+  footer { margin-top: 20px; }
+  .tools { display: flex; gap: 7px; flex-wrap: wrap; }
   .tool {
-    flex: 1 1 0; min-width: 130px; min-height: 44px; border-radius: 12px;
+    flex: 1 1 0; min-width: 130px; min-height: 42px; border-radius: 11px;
     border: 1px solid var(--line); background: #fff; color: var(--ink-soft);
-    font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; touch-action: manipulation;
+    font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer; touch-action: manipulation;
   }
   .tool:active { transform: scale(.98); }
-  .fine { margin: 14px 2px 0; font-size: 11.5px; color: var(--ink-faint); line-height: 1.6; }
+  .fine { margin: 12px 2px 0; font-size: 11px; color: var(--ink-faint); line-height: 1.6; }
   .fine b { color: var(--ink-soft); }
 
   /* ---------- toast ---------- */
   #toast {
-    position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom));
+    position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom));
     transform: translate(-50%, 14px); opacity: 0; pointer-events: none;
-    background: rgba(31,36,48,.93); color: #fff; font-size: 13px; font-weight: 700;
-    padding: 11px 16px; border-radius: 999px; z-index: 60; max-width: 88vw;
+    background: rgba(31,36,48,.93); color: #fff; font-size: 12.5px; font-weight: 700;
+    padding: 10px 15px; border-radius: 999px; z-index: 60; max-width: 88vw; text-align: center;
     transition: opacity .2s ease, transform .2s ease;
   }
   #toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 
-  .loading { text-align: center; color: var(--ink-faint); font-size: 13.5px; padding: 40px 10px; }
-  .error { background: var(--red-bg); color: var(--red); border-radius: 12px; padding: 14px; font-size: 13px; margin-top: 16px; }
+  .loading { text-align: center; color: var(--ink-faint); font-size: 13px; padding: 34px 10px; }
+  .error { background: var(--red-bg); color: var(--red); border-radius: 12px; padding: 13px; font-size: 12.5px; margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -253,42 +294,40 @@
 </header>
 
 <main class="wrap">
-  <section class="hero" aria-labelledby="progressLabel">
-    <div class="hero-top">
-      <div>
-        <div class="hero-label" id="progressLabel">읽은 책 진척도</div>
-        <div class="hero-pct"><span id="pctNum">0</span><span>%</span></div>
+  <section class="sum" aria-labelledby="progressLabel">
+    <div class="sum-top">
+      <div class="sum-pct"><b id="pctNum">0</b><span>%</span></div>
+      <div class="sum-mid">
+        <div class="sum-label" id="progressLabel">읽은 책 진척도</div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar">
+          <i id="barFill"></i>
+        </div>
       </div>
-      <div class="hero-count"><b id="readNum">0</b> / <span id="totalNum">0</span>권 읽음</div>
+      <div class="sum-count"><b id="readNum">0</b><span id="totalNum">0</span>권 중</div>
     </div>
-    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar">
-      <i id="barFill"></i>
+    <div class="stats" aria-label="상태별 권수">
+      <button class="stat s-borrow" type="button" data-jump="borrowed">
+        <span class="v" id="statBorrowed">0</span><span class="k">📖 빌리는 중</span>
+      </button>
+      <button class="stat s-wait" type="button" data-jump="waiting">
+        <span class="v" id="statWaiting">0</span><span class="k">⏳ 대기</span>
+      </button>
+      <button class="stat s-shelf" type="button" data-jump="available">
+        <span class="v" id="statAvailable">0</span><span class="k">✅ 비치중</span>
+      </button>
+      <button class="stat s-none" type="button" data-jump="notheld">
+        <span class="v" id="statNotheld">0</span><span class="k">❌ 미소장</span>
+      </button>
     </div>
-    <p class="hero-note" id="heroNote">책을 다 읽었으면 카드의 <b>읽음</b> 버튼을 눌러 주세요.</p>
   </section>
 
-  <section class="stats" aria-label="상태별 권수">
-    <button class="stat s-borrow" type="button" data-jump="borrowed">
-      <span class="k">📖 지금 빌리는 중</span>
-      <span class="v"><b id="statBorrowed">0</b><small>권</small></span>
+  <section class="peek" id="upcomingBox" hidden>
+    <button class="peek-head" id="peekBtn" type="button" aria-expanded="false" aria-controls="upcomingList">
+      <span class="peek-title">📌 챙길 일</span>
+      <span class="peek-sum" id="peekSum"></span>
+      <span class="peek-arrow" aria-hidden="true">▾</span>
     </button>
-    <button class="stat s-wait" type="button" data-jump="waiting">
-      <span class="k">⏳ 예약·상호대차 대기</span>
-      <span class="v"><b id="statWaiting">0</b><small>권</small></span>
-    </button>
-    <button class="stat s-shelf" type="button" data-jump="available">
-      <span class="k">✅ 도서관 비치중</span>
-      <span class="v"><b id="statAvailable">0</b><small>권</small></span>
-    </button>
-    <button class="stat s-none" type="button" data-jump="notheld">
-      <span class="k">❌ 미소장</span>
-      <span class="v"><b id="statNotheld">0</b><small>권</small></span>
-    </button>
-  </section>
-
-  <section class="upcoming" id="upcomingBox" hidden>
-    <h2>📌 챙길 일</h2>
-    <ul id="upcomingList"></ul>
+    <ul id="upcomingList" hidden></ul>
   </section>
 
   <section class="controls">
@@ -321,7 +360,8 @@
     <p class="fine">
       <b>데이터</b> 정약용도서관(lib.nyj.go.kr) 대출·예약·상호대차 현황에서 정리한 목록입니다.
       마지막 동기화 <span id="syncFine">-</span>.<br>
-      <b>도서 카드</b> ‘도서관에서 보기’는 정약용도서관 검색 결과를 새 창으로 열고, ‘복사’ 버튼은 채팅창에 붙여넣어 요청할 문장을 복사합니다.<br>
+      <b>표지</b> 실제 도서 표지 이미지를 ‘표지’ 폴더에 저장해 함께 배포합니다. 표지가 없는 책은 제목 카드로 대신 보여 줍니다.<br>
+      <b>도서 카드</b> ‘보기’는 정약용도서관 검색 결과를 새 창으로 열고, ‘복사’ 버튼은 채팅창에 붙여넣어 요청할 문장을 복사합니다.<br>
       <b>읽음 표시</b> 이 기기의 브라우저 저장소에만 저장되며 어디로도 전송되지 않습니다.
       폰을 바꾸실 때는 내보내기 파일을 새 기기에서 불러오시면 됩니다.<br>
       개인정보(이름·아이디·회원번호·대출번호)는 이 페이지에 담지 않습니다.
@@ -352,7 +392,7 @@
     { key: "notheld",   label: "❌ 미소장" }
   ];
 
-  var state = { books: [], filter: "all", query: "", read: {}, lastSyncedAt: "" };
+  var state = { books: [], filter: "all", query: "", read: {}, lastSyncedAt: "", peekOpen: false };
 
   /* ---------------- helpers ---------------- */
   function $(id) { return document.getElementById(id); }
@@ -403,40 +443,39 @@
   }
   function isRead(book) { return state.read[book.id] === true; }
   function isWaiting(book) { return book.status === "reserved" || book.status === "ill"; }
-
-  /* ---------------- status badge ---------------- */
-  function badgeHTML(book) {
-    var cls = book.status;
-    var text = "";
-    if (book.status === "borrowed") {
-      text = "📖 빌리는 중 (반납 ~" + koDate(book.dueDate) + ")";
-    } else if (book.status === "reserved") {
-      text = "⏳ 예약 " + book.reserveRank + "순위 (반납예정 " + koDate(book.dueDate) + ")";
-    } else if (book.status === "ill") {
-      text = "🚚 상호대차 " + book.illState + " (" + book.illFrom.replace("도서관", "") + "→" + book.illTo.replace("도서관", "") + ")";
-    } else if (book.status === "available") {
-      text = "✅ 정약용 비치중 (방문 대출가능)";
-    } else if (book.status === "notheld") {
-      text = "❌ 남양주 미소장";
-    }
-    return '<span class="badge ' + cls + '">' + esc(text) + "</span>";
+  function shortTitle(t) {
+    return String(t).replace(/^\[CD\]/, "").replace(/^\((?:The|A)\)/, "").trim();
   }
 
-  function subLine(book) {
-    if (book.status === "borrowed") {
-      var d = daysUntil(book.dueDate);
-      if (d !== null && d >= 0) return "반납까지 " + d + "일";
-      return "반납일 지남";
-    }
-    if (book.status === "reserved") {
-      return "예약 " + book.requestedAt.replace(/-/g, ".") + " 신청";
-    }
-    if (book.status === "ill") {
-      return "신청 " + book.requestedAt.replace(/-/g, ".") + " · 도착 알림 후 4일 내 수령";
-    }
-    if (book.status === "available") return "방문 대출만 가능(온라인 예약 불가)";
-    if (book.status === "notheld") return "희망도서 신청 또는 책바다 대상";
+  /* ---------------- status badge ---------------- */
+  function badgeText(book) {
+    if (book.status === "borrowed")  return "📖 " + ddayText(book.dueDate);
+    if (book.status === "reserved")  return "⏳ 예약 " + book.reserveRank + "순위";
+    if (book.status === "ill")       return "🚚 상호대차 " + book.illState;
+    if (book.status === "available") return "✅ 비치중";
+    if (book.status === "notheld")   return "❌ 미소장";
     return "";
+  }
+  function badgeTitle(book) {
+    if (book.status === "borrowed")  return "빌리는 중 · 반납 " + koDate(book.dueDate) + " (" + ddayText(book.dueDate) + ")";
+    if (book.status === "reserved")  return "예약 " + book.reserveRank + "순위 · 앞 대출자 반납 " + koDate(book.dueDate);
+    if (book.status === "ill")       return "상호대차 " + book.illState + " (" + book.illFrom + " → " + book.illTo + ")";
+    if (book.status === "available") return "정약용도서관 비치중 · 방문 대출만 가능";
+    if (book.status === "notheld")   return "남양주시 도서관 미소장";
+    return "";
+  }
+  function badgeHTML(book) {
+    return '<span class="badge ' + esc(book.status) + '" title="' + esc(badgeTitle(book)) + '">'
+      + esc(badgeText(book)) + "</span>";
+  }
+
+  function metaLine(book) {
+    var bits = [];
+    if (book.author) bits.push(book.author);
+    if (book.publisher) bits.push(book.publisher + (book.year ? " " + book.year : ""));
+    if (book.callNo) bits.push(book.callNo);
+    if (book.status === "borrowed" && book.dueDate) bits.push("반납 " + koDate(book.dueDate));
+    return bits.join(" · ");
   }
 
   /* ---------------- render ---------------- */
@@ -453,18 +492,15 @@
     return c;
   }
 
-  function renderHero() {
+  function renderSummary() {
     var c = counts();
     var pct = c.all ? Math.round((c.read / c.all) * 100) : 0;
     $("pctNum").textContent = pct;
     $("readNum").textContent = c.read;
     $("totalNum").textContent = c.all;
     $("barFill").style.width = pct + "%";
-    var bar = $("bar");
-    bar.setAttribute("aria-valuenow", String(pct));
-    $("heroNote").innerHTML = c.read === 0
-      ? "아직 읽음 표시가 없어요. 다 읽은 책의 <b>읽음</b> 버튼을 눌러 주세요."
-      : "남은 " + (c.all - c.read) + "권 · 빌리는 중 " + c.borrowed + "권은 반납 전에 읽으면 좋아요.";
+    $("bar").setAttribute("aria-valuenow", String(pct));
+    $("bar").setAttribute("aria-valuetext", c.all + "권 중 " + c.read + "권 읽음");
     $("statBorrowed").textContent = c.borrowed;
     $("statWaiting").textContent = c.waiting;
     $("statAvailable").textContent = c.available;
@@ -483,7 +519,6 @@
     Array.prototype.forEach.call($("chips").querySelectorAll(".chip"), function (el) {
       el.addEventListener("click", function () {
         state.filter = el.getAttribute("data-filter");
-        if (state.filter === "borrowed") state.filter = "borrowed";
         render();
       });
     });
@@ -524,6 +559,17 @@
     $("upcomingList").innerHTML = items.map(function (i) {
       return "<li><em>" + esc(i.when) + "</em><span>" + esc(i.what) + "</span></li>";
     }).join("");
+    var head = items[0].when + " · " + items[0].what;
+    $("peekSum").innerHTML = "<b>" + items.length + "건</b> · " + esc(head);
+    applyPeek();
+  }
+
+  function applyPeek() {
+    var btn = $("peekBtn");
+    var list = $("upcomingList");
+    $("upcomingBox").classList.toggle("is-open", state.peekOpen);
+    btn.setAttribute("aria-expanded", String(state.peekOpen));
+    list.hidden = !state.peekOpen;
   }
 
   function matchQuery(b) {
@@ -552,7 +598,7 @@
     var t = searchTitle(book);
     switch (book.status) {
       case "reserved":
-        return { label: "📋 예약 요청 복사", text: "정약용도서관에서 『" + t + "』 예약 신청해 줘" };
+        return { label: "📋 예약 복사", text: "정약용도서관에서 『" + t + "』 예약 신청해 줘" };
       case "ill":
         return { label: "📋 상호대차 복사", text: "정약용도서관에서 『" + t + "』 상호대차 신청해 줘" };
       case "notheld":
@@ -593,36 +639,46 @@
     }
   }
 
+  function coverHTML(b) {
+    var fb = '<span class="fb" aria-hidden="true"><b>' + esc(shortTitle(b.title).slice(0, 22)) + "</b><i>"
+      + esc(String(b.author || "").split(/[;,]/)[0].slice(0, 14)) + "</i></span>";
+    if (!b.cover) return '<div class="cover">' + fb + "</div>";
+    return '<div class="cover">' + fb
+      + '<img src="' + esc(b.cover) + '" alt="" width="56" height="80" loading="lazy" decoding="async">'
+      + "</div>";
+  }
+
   function bookHTML(b) {
     var read = isRead(b);
-    var callNo = b.callNo ? '<div class="call">청구기호 ' + esc(b.callNo) + "</div>" : "";
-    var listTag = b.list === "loan" ? "지금 대출" : "어제 요청";
     var act = requestAction(b);
     return '<article class="book' + (read ? " read" : "") + '" data-id="' + esc(b.id) + '">'
-      + '<div class="book-top">' + badgeHTML(b)
-      + '<span class="tag">' + esc(listTag) + "</span></div>"
-      + "<h3>" + esc(b.title) + "</h3>"
-      + '<p class="meta">' + esc(b.author) + '<span class="dot">·</span>' + esc(b.publisher)
-      + " " + esc(b.year) + '<span class="dot">·</span>' + esc(b.category) + "</p>"
-      + callNo
-      + '<p class="state-line">' + esc(subLine(b)) + "</p>"
-      + '<div class="book-foot">'
-      + '<button class="read-btn' + (read ? " is-read" : "") + '" type="button" data-read="' + esc(b.id) + '" '
-      + 'aria-pressed="' + read + '">' + (read ? "✔ 읽음 완료" : "읽음 표시") + "</button>"
-      + '<button class="copy-btn" type="button" data-copy="' + esc(b.id) + '" '
-      + 'title="' + esc(act.text) + '">' + esc(act.label) + "</button>"
-      + "</div>"
-      + '<a class="lib-link" href="' + esc(libraryURL(b)) + '" target="_blank" rel="noopener noreferrer">'
-      + "🏛 도서관에서 보기 <span aria-hidden=&quot;true&quot;>↗</span></a>"
-      + "</article>";
+      + coverHTML(b)
+      + '<div class="body">'
+      +   '<div class="title-row"><h3>' + esc(b.title) + "</h3>" + badgeHTML(b) + "</div>"
+      +   '<p class="meta" title="' + esc(b.title + " · " + metaLine(b)) + '">' + esc(metaLine(b)) + "</p>"
+      +   '<div class="foot">'
+      +     '<button class="read-btn' + (read ? " is-read" : "") + '" type="button" data-read="' + esc(b.id) + '" '
+      +       'aria-pressed="' + read + '">' + (read ? "✔ 읽음" : "읽음 표시") + "</button>"
+      +     '<button class="copy-btn" type="button" data-copy="' + esc(b.id) + '" '
+      +       'title="' + esc(act.text) + '">' + esc(act.label) + "</button>"
+      +     '<a class="lib-link" href="' + esc(libraryURL(b)) + '" target="_blank" rel="noopener noreferrer" '
+      +       'title="정약용도서관에서 검색">🏛 보기</a>'
+      +   "</div>"
+      + "</div></article>";
   }
 
   function renderBooks() {
     var shown = state.books.filter(function (b) { return matchFilter(b) && matchQuery(b); });
-    $("bookList").innerHTML = shown.map(bookHTML).join("");
+    var list = $("bookList");
+    list.innerHTML = shown.map(bookHTML).join("");
     $("empty").hidden = shown.length !== 0;
     $("listCount").textContent = shown.length + "권 표시 중 · 전체 " + state.books.length + "권";
-    Array.prototype.forEach.call($("bookList").querySelectorAll("[data-read]"), function (btn) {
+
+    Array.prototype.forEach.call(list.querySelectorAll(".cover img"), function (img) {
+      img.addEventListener("error", function () { img.parentNode.removeChild(img); });
+      if (img.complete && img.naturalWidth === 0) img.parentNode.removeChild(img);
+    });
+    Array.prototype.forEach.call(list.querySelectorAll("[data-read]"), function (btn) {
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-read");
         if (state.read[id]) { delete state.read[id]; toast("읽음 표시를 해제했어요"); }
@@ -631,7 +687,7 @@
         render();
       });
     });
-    Array.prototype.forEach.call($("bookList").querySelectorAll("[data-copy]"), function (btn) {
+    Array.prototype.forEach.call(list.querySelectorAll("[data-copy]"), function (btn) {
       btn.addEventListener("click", function () {
         var id = btn.getAttribute("data-copy");
         var book = null;
@@ -644,7 +700,7 @@
     });
   }
 
-  function render() { renderHero(); renderChips(); renderUpcoming(); renderBooks(); }
+  function render() { renderSummary(); renderChips(); renderUpcoming(); renderBooks(); }
 
   /* ---------------- data ---------------- */
   function init(data) {
@@ -682,6 +738,11 @@
   syncHeaderHeight();
   window.addEventListener("resize", syncHeaderHeight);
   window.addEventListener("orientationchange", syncHeaderHeight);
+
+  $("peekBtn").addEventListener("click", function () {
+    state.peekOpen = !state.peekOpen;
+    applyPeek();
+  });
 
   $("searchInput").addEventListener("input", function (e) {
     state.query = e.target.value.trim();
