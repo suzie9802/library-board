@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f5f0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="책 대시보드">
+<meta name="description" content="정약용도서관 대출·예약·상호대차 상태와 읽은 책 진척도를 한눈에 보는 독서 대시보드">
+<title>📚 책 대시보드</title>
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --ink: #1f2430;
+    --ink-soft: #5b6473;
+    --ink-faint: #8a93a3;
+    --line: #e8e4dc;
+    --accent: #2f6f5e;
+    --accent-soft: #e6f1ed;
+    --blue: #2563eb;   --blue-bg: #eaf1ff;
+    --amber: #b45309;  --amber-bg: #fff6e6;
+    --violet: #6d28d9; --violet-bg: #f3eeff;
+    --green: #15803d;  --green-bg: #eafaf0;
+    --red: #b91c1c;    --red-bg: #fdeeee;
+    --shadow: 0 1px 2px rgba(31,36,48,.05), 0 6px 18px rgba(31,36,48,.05);
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
+                 "Malgun Gothic", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 0 calc(28px + env(safe-area-inset-bottom));
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 30;
+    background: #f7f5f0;
+    border-bottom: 1px solid var(--line);
+    padding: calc(10px + env(safe-area-inset-top)) 0 10px;
+  }
+  .head-in { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .brand h1 { font-size: 18px; margin: 0; letter-spacing: -.02em; }
+  .brand p { margin: 2px 0 0; font-size: 11.5px; color: var(--ink-faint); }
+  .lib-badge {
+    flex: 0 0 auto; font-size: 11.5px; font-weight: 700; color: var(--accent);
+    background: var(--accent-soft); border-radius: 999px; padding: 6px 10px; white-space: nowrap;
+  }
+
+  /* ---------- progress hero ---------- */
+  .hero {
+    margin-top: 16px; background: var(--card); border-radius: var(--radius);
+    padding: 18px 18px 16px; box-shadow: var(--shadow); border: 1px solid #f0ece4;
+  }
+  .hero-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+  .hero-label { font-size: 12.5px; font-weight: 700; color: var(--ink-soft); letter-spacing: -.01em; }
+  .hero-pct { font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; color: var(--accent); }
+  .hero-pct span { font-size: 16px; font-weight: 700; margin-left: 2px; }
+  .hero-count { text-align: right; font-size: 13px; color: var(--ink-soft); padding-bottom: 4px; }
+  .hero-count b { font-size: 17px; color: var(--ink); }
+  .bar { height: 12px; border-radius: 999px; background: #efece5; margin-top: 12px; overflow: hidden; }
+  .bar > i {
+    display: block; height: 100%; width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #3f8b76, #2f6f5e);
+    transition: width .45s cubic-bezier(.2,.8,.2,1);
+  }
+  .hero-note { margin: 10px 0 0; font-size: 12px; color: var(--ink-faint); }
+
+  /* ---------- stat grid ---------- */
+  .stats {
+    display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px; margin-top: 12px;
+  }
+  .stat {
+    background: var(--card); border: 1px solid #f0ece4; border-radius: 14px;
+    padding: 12px 13px; box-shadow: var(--shadow); cursor: pointer;
+    display: flex; flex-direction: column; gap: 2px; text-align: left;
+    font-family: inherit; color: inherit;
+    touch-action: manipulation; transition: transform .12s ease, border-color .12s ease;
+  }
+  .stat:active { transform: scale(.98); }
+  .stat .k { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); display: flex; align-items: center; gap: 5px; }
+  .stat .v { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+  .stat .v small { font-size: 12px; font-weight: 700; color: var(--ink-faint); margin-left: 2px; }
+  .stat.is-on { border-color: #cfd8d3; box-shadow: 0 0 0 2px rgba(47,111,94,.12), var(--shadow); }
+  .s-borrow .v { color: var(--blue); }
+  .s-wait .v { color: var(--amber); }
+  .s-shelf .v { color: var(--green); }
+  .s-none .v { color: var(--red); }
+
+  /* ---------- upcoming ---------- */
+  .upcoming {
+    margin-top: 12px; background: var(--card); border: 1px solid #f0ece4;
+    border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow);
+  }
+  .upcoming h2 { font-size: 13px; margin: 0 0 8px; color: var(--ink-soft); letter-spacing: -.01em; }
+  .upcoming ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+  .upcoming li { font-size: 13px; color: var(--ink); display: flex; gap: 8px; align-items: baseline; }
+  .upcoming li em { font-style: normal; font-weight: 700; color: var(--ink-soft); flex: 0 0 auto; min-width: 78px; font-size: 12px; }
+
+  /* ---------- controls ---------- */
+  .controls { margin-top: 18px; position: sticky; top: var(--headerH, 58px); z-index: 20;
+    scroll-margin-top: calc(var(--headerH, 58px) + 8px);
+    background: var(--bg); padding-bottom: 8px;
+    box-shadow: 0 10px 12px -12px rgba(31,36,48,.16); }
+  .chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: 0 0 auto; border: 1px solid var(--line); background: #fff; color: var(--ink-soft);
+    font: inherit; font-size: 13px; font-weight: 700; padding: 9px 13px; border-radius: 999px;
+    cursor: pointer; white-space: nowrap; touch-action: manipulation;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .chip b { font-weight: 800; margin-left: 4px; }
+  .chip.is-on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .chip.is-on b { color: #fff; }
+  .chip:active { transform: scale(.97); }
+
+  .search { position: relative; margin-top: 4px; }
+  .search input {
+    width: 100%; font: inherit; font-size: 16px; color: var(--ink);
+    padding: 12px 42px 12px 14px; border-radius: 12px;
+    border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow);
+    -webkit-appearance: none; appearance: none;
+  }
+  .search input:focus { outline: none; border-color: #b9c9c2; box-shadow: 0 0 0 3px rgba(47,111,94,.12); }
+  .search .clear {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    width: 34px; height: 34px; border: 0; border-radius: 50%; background: #f1eee8;
+    color: var(--ink-soft); font-size: 16px; line-height: 1; cursor: pointer; display: none;
+  }
+  .search .clear.is-on { display: block; }
+
+  /* ---------- book list ---------- */
+  .list-head { display: flex; align-items: baseline; justify-content: space-between; margin: 14px 2px 8px; }
+  .list-head p { margin: 0; font-size: 12.5px; color: var(--ink-faint); font-weight: 700; }
+  .books { display: grid; gap: 10px; }
+  @media (min-width: 700px) { .books { grid-template-columns: 1fr 1fr; } }
+
+  .book {
+    background: var(--card); border: 1px solid #f0ece4; border-radius: var(--radius);
+    padding: 14px 15px 13px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 9px;
+  }
+  .book.read { background: #fbfdfb; border-color: #dfeae3; }
+  .book-top { display: flex; gap: 8px; align-items: flex-start; justify-content: space-between; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11.5px; font-weight: 800; padding: 5px 9px; border-radius: 999px; white-space: nowrap;
+  }
+  .badge.borrowed { color: var(--blue);   background: var(--blue-bg); }
+  .badge.reserved { color: var(--amber);  background: var(--amber-bg); }
+  .badge.ill      { color: var(--violet); background: var(--violet-bg); }
+  .badge.available{ color: var(--green);  background: var(--green-bg); }
+  .badge.notheld  { color: var(--red);    background: var(--red-bg); }
+  .badge.dday { color: var(--blue); background: var(--blue-bg); }
+  .tag {
+    font-size: 11px; font-weight: 700; color: var(--ink-faint);
+    border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; white-space: nowrap;
+  }
+  .book h3 { font-size: 15.5px; margin: 0; line-height: 1.34; letter-spacing: -.01em; word-break: keep-all; }
+  .book .meta { font-size: 12.5px; color: var(--ink-soft); margin: 0; word-break: keep-all; }
+  .book .meta .dot { color: #c9c3b8; margin: 0 4px; }
+  .book .call { font-size: 11.5px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .book .state-line { font-size: 11.5px; color: var(--ink-faint); margin: -2px 0 0; text-align: right; }
+  .book-foot { display: flex; align-items: stretch; gap: 8px; margin-top: 4px; }
+  .read-btn { flex: 1 1 0; min-width: 0; }
+  .copy-btn {
+    flex: 1 1 0; min-width: 0; min-height: 40px; padding: 0 10px; border-radius: 11px; cursor: pointer;
+    border: 1px solid #cfd8d3; background: #f4f9f7; color: var(--accent);
+    font: inherit; font-size: 12.5px; font-weight: 800; touch-action: manipulation;
+    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    transition: background .15s ease, transform .1s ease;
+  }
+  .copy-btn:active { transform: scale(.97); }
+  .copy-btn:focus-visible { outline: 3px solid rgba(47,111,94,.25); outline-offset: 2px; }
+  .lib-link {
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    min-height: 38px; margin-top: 1px; border-radius: 11px; text-decoration: none;
+    border: 1px dashed var(--line); color: var(--ink-soft); background: #fdfcf9;
+    font-size: 12.5px; font-weight: 700; touch-action: manipulation;
+  }
+  .lib-link:active { background: #f4f1ea; }
+  .read-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    min-height: 40px; padding: 0 14px; border-radius: 11px; cursor: pointer;
+    border: 1px solid var(--line); background: #fff; color: var(--ink-soft);
+    font: inherit; font-size: 13px; font-weight: 800; touch-action: manipulation;
+    transition: background .15s ease, color .15s ease, border-color .15s ease, transform .1s ease;
+  }
+  .read-btn:active { transform: scale(.97); }
+  .read-btn:focus-visible { outline: 3px solid rgba(47,111,94,.25); outline-offset: 2px; }
+  .read-btn.is-read { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .book .sub { font-size: 11.5px; color: var(--ink-faint); text-align: right; }
+  .rule-note {
+    margin: 16px 0 0; padding: 12px 14px; border-radius: 12px;
+    background: #fffdf7; border: 1px solid #f0e7d2; color: #7a6636;
+    font-size: 11.5px; line-height: 1.65;
+  }
+  .rule-note b { color: #5f4f26; }
+
+  .empty {
+    text-align: center; color: var(--ink-faint); font-size: 13.5px;
+    background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius);
+    padding: 34px 16px; margin-top: 4px;
+  }
+
+  /* ---------- footer ---------- */
+  footer { margin-top: 26px; }
+  .tools { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tool {
+    flex: 1 1 0; min-width: 130px; min-height: 44px; border-radius: 12px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink-soft);
+    font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; touch-action: manipulation;
+  }
+  .tool:active { transform: scale(.98); }
+  .fine { margin: 14px 2px 0; font-size: 11.5px; color: var(--ink-faint); line-height: 1.6; }
+  .fine b { color: var(--ink-soft); }
+
+  /* ---------- toast ---------- */
+  #toast {
+    position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom));
+    transform: translate(-50%, 14px); opacity: 0; pointer-events: none;
+    background: rgba(31,36,48,.93); color: #fff; font-size: 13px; font-weight: 700;
+    padding: 11px 16px; border-radius: 999px; z-index: 60; max-width: 88vw;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  #toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+
+  .loading { text-align: center; color: var(--ink-faint); font-size: 13.5px; padding: 40px 10px; }
+  .error { background: var(--red-bg); color: var(--red); border-radius: 12px; padding: 14px; font-size: 13px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap head-in">
+    <div class="brand">
+      <h1>📚 책 대시보드</h1>
+      <p id="syncLine">정약용도서관 · 동기화 확인 중…</p>
+    </div>
+    <div class="lib-badge">정약용도서관</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" aria-labelledby="progressLabel">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label" id="progressLabel">읽은 책 진척도</div>
+        <div class="hero-pct"><span id="pctNum">0</span><span>%</span></div>
+      </div>
+      <div class="hero-count"><b id="readNum">0</b> / <span id="totalNum">0</span>권 읽음</div>
+    </div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar">
+      <i id="barFill"></i>
+    </div>
+    <p class="hero-note" id="heroNote">책을 다 읽었으면 카드의 <b>읽음</b> 버튼을 눌러 주세요.</p>
+  </section>
+
+  <section class="stats" aria-label="상태별 권수">
+    <button class="stat s-borrow" type="button" data-jump="borrowed">
+      <span class="k">📖 지금 빌리는 중</span>
+      <span class="v"><b id="statBorrowed">0</b><small>권</small></span>
+    </button>
+    <button class="stat s-wait" type="button" data-jump="waiting">
+      <span class="k">⏳ 예약·상호대차 대기</span>
+      <span class="v"><b id="statWaiting">0</b><small>권</small></span>
+    </button>
+    <button class="stat s-shelf" type="button" data-jump="available">
+      <span class="k">✅ 도서관 비치중</span>
+      <span class="v"><b id="statAvailable">0</b><small>권</small></span>
+    </button>
+    <button class="stat s-none" type="button" data-jump="notheld">
+      <span class="k">❌ 미소장</span>
+      <span class="v"><b id="statNotheld">0</b><small>권</small></span>
+    </button>
+  </section>
+
+  <section class="upcoming" id="upcomingBox" hidden>
+    <h2>📌 챙길 일</h2>
+    <ul id="upcomingList"></ul>
+  </section>
+
+  <section class="controls">
+    <div class="chips" id="chips" role="tablist" aria-label="상태 필터"></div>
+    <div class="search">
+      <input id="searchInput" type="search" inputmode="search" autocomplete="off"
+             placeholder="제목·저자 검색" aria-label="제목·저자 검색">
+      <button class="clear" id="clearBtn" type="button" aria-label="검색어 지우기">✕</button>
+    </div>
+  </section>
+
+  <div class="list-head">
+    <p id="listCount">불러오는 중…</p>
+  </div>
+
+  <section class="books" id="bookList" aria-live="polite"></section>
+  <div class="empty" id="empty" hidden>조건에 맞는 책이 없어요.</div>
+
+  <footer>
+    <div class="tools">
+      <button class="tool" id="exportBtn" type="button">⬇️ 읽음 표시 내보내기</button>
+      <button class="tool" id="importBtn" type="button">⬆️ 읽음 표시 불러오기</button>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
+    </div>
+    <p class="rule-note">
+      <b>정약용도서관 규정</b> 자관 대출 <b>10권</b> · 동시 예약 <b>3권</b> · 상호대차 1인 <b>5권</b>(대출 권수 포함).
+      예약·상호대차 도착 알림을 받은 날 포함 <b>4일</b> 안에 찾아가지 않으면 예약이 취소되고, 다음 날부터 <b>7일</b>간 신청이 제한됩니다.
+      서가에 꽂힌 ‘비치중’ 도서는 온라인 예약이 되지 않아 방문 대출만 가능합니다.
+    </p>
+    <p class="fine">
+      <b>데이터</b> 정약용도서관(lib.nyj.go.kr) 대출·예약·상호대차 현황에서 정리한 목록입니다.
+      마지막 동기화 <span id="syncFine">-</span>.<br>
+      <b>도서 카드</b> ‘도서관에서 보기’는 정약용도서관 검색 결과를 새 창으로 열고, ‘복사’ 버튼은 채팅창에 붙여넣어 요청할 문장을 복사합니다.<br>
+      <b>읽음 표시</b> 이 기기의 브라우저 저장소에만 저장되며 어디로도 전송되지 않습니다.
+      폰을 바꾸실 때는 내보내기 파일을 새 기기에서 불러오시면 됩니다.<br>
+      개인정보(이름·아이디·회원번호·대출번호)는 이 페이지에 담지 않습니다.
+    </p>
+  </footer>
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var STORE_KEY = "libraryBoard.v1.read";
+  var STATUS = {
+    borrowed:  { icon: "📖", label: "빌리는 중" },
+    reserved:  { icon: "⏳", label: "예약" },
+    ill:       { icon: "🚚", label: "상호대차" },
+    available: { icon: "✅", label: "비치중" },
+    notheld:   { icon: "❌", label: "미소장" }
+  };
+  var FILTERS = [
+    { key: "all",       label: "전체" },
+    { key: "borrowed",  label: "📖 빌리는 중" },
+    { key: "waiting",   label: "⏳ 예약·상호대차" },
+    { key: "available", label: "✅ 비치중" },
+    { key: "read",      label: "✔ 읽음" },
+    { key: "notheld",   label: "❌ 미소장" }
+  ];
+
+  var state = { books: [], filter: "all", query: "", read: {}, lastSyncedAt: "" };
+
+  /* ---------------- helpers ---------------- */
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function todayStamp() {
+    var d = new Date();
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  }
+  function daysUntil(isoDate) {
+    if (!isoDate) return null;
+    var a = new Date(isoDate + "T00:00:00");
+    var b = new Date(todayStamp() + "T00:00:00");
+    return Math.round((a - b) / 86400000);
+  }
+  function koDate(isoDate) {
+    if (!isoDate) return "";
+    var p = isoDate.split("-");
+    return Number(p[1]) + "/" + Number(p[2]);
+  }
+  function ddayText(isoDate) {
+    var d = daysUntil(isoDate);
+    if (d === null) return "";
+    if (d === 0) return "D-day";
+    return d > 0 ? "D-" + d : "D+" + Math.abs(d);
+  }
+  function loadRead() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return {};
+      var obj = JSON.parse(raw);
+      return obj && typeof obj === "object" ? obj : {};
+    } catch (e) { return {}; }
+  }
+  function saveRead() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state.read)); }
+    catch (e) { toast("이 브라우저에 저장하지 못했어요 (사생활 보호 모드일 수 있어요)"); }
+  }
+  function toast(msg) {
+    var t = $("toast");
+    t.textContent = msg;
+    t.classList.add("is-on");
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { t.classList.remove("is-on"); }, 1900);
+  }
+  function isRead(book) { return state.read[book.id] === true; }
+  function isWaiting(book) { return book.status === "reserved" || book.status === "ill"; }
+
+  /* ---------------- status badge ---------------- */
+  function badgeHTML(book) {
+    var cls = book.status;
+    var text = "";
+    if (book.status === "borrowed") {
+      text = "📖 빌리는 중 (반납 ~" + koDate(book.dueDate) + ")";
+    } else if (book.status === "reserved") {
+      text = "⏳ 예약 " + book.reserveRank + "순위 (반납예정 " + koDate(book.dueDate) + ")";
+    } else if (book.status === "ill") {
+      text = "🚚 상호대차 " + book.illState + " (" + book.illFrom.replace("도서관", "") + "→" + book.illTo.replace("도서관", "") + ")";
+    } else if (book.status === "available") {
+      text = "✅ 정약용 비치중 (방문 대출가능)";
+    } else if (book.status === "notheld") {
+      text = "❌ 남양주 미소장";
+    }
+    return '<span class="badge ' + cls + '">' + esc(text) + "</span>";
+  }
+
+  function subLine(book) {
+    if (book.status === "borrowed") {
+      var d = daysUntil(book.dueDate);
+      if (d !== null && d >= 0) return "반납까지 " + d + "일";
+      return "반납일 지남";
+    }
+    if (book.status === "reserved") {
+      return "예약 " + book.requestedAt.replace(/-/g, ".") + " 신청";
+    }
+    if (book.status === "ill") {
+      return "신청 " + book.requestedAt.replace(/-/g, ".") + " · 도착 알림 후 4일 내 수령";
+    }
+    if (book.status === "available") return "방문 대출만 가능(온라인 예약 불가)";
+    if (book.status === "notheld") return "희망도서 신청 또는 책바다 대상";
+    return "";
+  }
+
+  /* ---------------- render ---------------- */
+  function counts() {
+    var c = { all: 0, borrowed: 0, waiting: 0, available: 0, notheld: 0, read: 0 };
+    state.books.forEach(function (b) {
+      c.all++;
+      if (isRead(b)) c.read++;
+      if (b.status === "borrowed") c.borrowed++;
+      if (isWaiting(b)) c.waiting++;
+      if (b.status === "available") c.available++;
+      if (b.status === "notheld") c.notheld++;
+    });
+    return c;
+  }
+
+  function renderHero() {
+    var c = counts();
+    var pct = c.all ? Math.round((c.read / c.all) * 100) : 0;
+    $("pctNum").textContent = pct;
+    $("readNum").textContent = c.read;
+    $("totalNum").textContent = c.all;
+    $("barFill").style.width = pct + "%";
+    var bar = $("bar");
+    bar.setAttribute("aria-valuenow", String(pct));
+    $("heroNote").innerHTML = c.read === 0
+      ? "아직 읽음 표시가 없어요. 다 읽은 책의 <b>읽음</b> 버튼을 눌러 주세요."
+      : "남은 " + (c.all - c.read) + "권 · 빌리는 중 " + c.borrowed + "권은 반납 전에 읽으면 좋아요.";
+    $("statBorrowed").textContent = c.borrowed;
+    $("statWaiting").textContent = c.waiting;
+    $("statAvailable").textContent = c.available;
+    $("statNotheld").textContent = c.notheld;
+  }
+
+  function renderChips() {
+    var c = counts();
+    var html = FILTERS.map(function (f) {
+      var n = c[f.key === "waiting" ? "waiting" : f.key];
+      return '<button class="chip' + (state.filter === f.key ? " is-on" : "") + '" type="button" role="tab" '
+        + 'aria-selected="' + (state.filter === f.key) + '" data-filter="' + f.key + '">'
+        + esc(f.label) + "<b>" + n + "</b></button>";
+    }).join("");
+    $("chips").innerHTML = html;
+    Array.prototype.forEach.call($("chips").querySelectorAll(".chip"), function (el) {
+      el.addEventListener("click", function () {
+        state.filter = el.getAttribute("data-filter");
+        if (state.filter === "borrowed") state.filter = "borrowed";
+        render();
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".stat"), function (el) {
+      el.classList.toggle("is-on", state.filter === el.getAttribute("data-jump"));
+    });
+  }
+
+  function renderUpcoming() {
+    var items = [];
+    var dues = {};
+    var borrowedCount = 0;
+    state.books.forEach(function (b) {
+      if (b.status === "borrowed") {
+        borrowedCount++;
+        dues[b.dueDate] = (dues[b.dueDate] || 0) + 1;
+      }
+    });
+    Object.keys(dues).sort().forEach(function (d) {
+      items.push({ when: koDate(d) + " " + ddayText(d), what: "빌린 책 " + dues[d] + "권 반납" });
+    });
+    state.books.forEach(function (b) {
+      if (b.status === "reserved") {
+        items.push({
+          when: "예약 " + b.reserveRank + "순위",
+          what: b.title.split(",")[0] + " · 앞 대출자 반납 " + koDate(b.dueDate) + " → 이후 도착"
+        });
+      }
+      if (b.status === "ill") {
+        items.push({ when: "상호대차 " + b.illState, what: b.title + " · " + b.illFrom + " → " + b.illTo + " (3~5일)" });
+      }
+    });
+    if (borrowedCount >= 10) {
+      items.push({ when: "대출 한도", what: "자관 10권 한도가 꽉 찼어요. 새 책을 빌리려면 먼저 반납이 필요해요" });
+    }
+    if (!items.length) { $("upcomingBox").hidden = true; return; }
+    $("upcomingBox").hidden = false;
+    $("upcomingList").innerHTML = items.map(function (i) {
+      return "<li><em>" + esc(i.when) + "</em><span>" + esc(i.what) + "</span></li>";
+    }).join("");
+  }
+
+  function matchQuery(b) {
+    if (!state.query) return true;
+    var q = state.query.toLowerCase();
+    return (b.title + " " + b.author + " " + (b.category || "") + " " + (b.publisher || ""))
+      .toLowerCase().indexOf(q) !== -1;
+  }
+  function matchFilter(b) {
+    var f = state.filter;
+    if (f === "all") return true;
+    if (f === "read") return isRead(b);
+    if (f === "waiting") return isWaiting(b);
+    return b.status === f;
+  }
+
+  /* ---------------- 도서관 연결 ---------------- */
+  function searchTitle(book) {
+    return String(book.title).replace(/^\[CD\]/, "").trim();
+  }
+  function libraryURL(book) {
+    return "https://lib.nyj.go.kr/jyy/plusSearchResultList.do?searchType=SIMPLE&searchCategory=ALL"
+      + "&searchKey=ALL&searchKeyword=" + encodeURIComponent(searchTitle(book));
+  }
+  function requestAction(book) {
+    var t = searchTitle(book);
+    switch (book.status) {
+      case "reserved":
+        return { label: "📋 예약 요청 복사", text: "정약용도서관에서 『" + t + "』 예약 신청해 줘" };
+      case "ill":
+        return { label: "📋 상호대차 복사", text: "정약용도서관에서 『" + t + "』 상호대차 신청해 줘" };
+      case "notheld":
+        return { label: "📋 희망도서 복사", text: "정약용도서관에 『" + t + "』 희망도서 신청할 수 있게 해 줘" };
+      case "available":
+        return { label: "📋 대출 문의 복사", text: "정약용도서관에서 『" + t + "』 지금 비치중인지 확인해 줘 (방문 대출)" };
+      default:
+        return { label: "📋 반납 일정 복사", text: "정약용도서관에서 『" + t + "』 반납 일정 확인해 줘" };
+    }
+  }
+  function legacyCopy(text) {
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      ta.style.left = "0";
+      ta.style.fontSize = "16px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { ta.setSelectionRange(0, ta.value.length); } catch (e) {}
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) { return false; }
+  }
+  function copyThenToast(text) {
+    function done(ok) {
+      if (ok) { toast("복사됐어요! 찹쌀이 채팅창에 붙여넣어 주세요"); return; }
+      if (legacyCopy(text)) { toast("복사됐어요! 찹쌀이 채팅창에 붙여넣어 주세요"); return; }
+      window.prompt("복사가 안 됐어요. 아래 문장을 길게 눌러 복사한 뒤 채팅창에 붙여넣어 주세요.", text);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else {
+      done(false);
+    }
+  }
+
+  function bookHTML(b) {
+    var read = isRead(b);
+    var callNo = b.callNo ? '<div class="call">청구기호 ' + esc(b.callNo) + "</div>" : "";
+    var listTag = b.list === "loan" ? "지금 대출" : "어제 요청";
+    var act = requestAction(b);
+    return '<article class="book' + (read ? " read" : "") + '" data-id="' + esc(b.id) + '">'
+      + '<div class="book-top">' + badgeHTML(b)
+      + '<span class="tag">' + esc(listTag) + "</span></div>"
+      + "<h3>" + esc(b.title) + "</h3>"
+      + '<p class="meta">' + esc(b.author) + '<span class="dot">·</span>' + esc(b.publisher)
+      + " " + esc(b.year) + '<span class="dot">·</span>' + esc(b.category) + "</p>"
+      + callNo
+      + '<p class="state-line">' + esc(subLine(b)) + "</p>"
+      + '<div class="book-foot">'
+      + '<button class="read-btn' + (read ? " is-read" : "") + '" type="button" data-read="' + esc(b.id) + '" '
+      + 'aria-pressed="' + read + '">' + (read ? "✔ 읽음 완료" : "읽음 표시") + "</button>"
+      + '<button class="copy-btn" type="button" data-copy="' + esc(b.id) + '" '
+      + 'title="' + esc(act.text) + '">' + esc(act.label) + "</button>"
+      + "</div>"
+      + '<a class="lib-link" href="' + esc(libraryURL(b)) + '" target="_blank" rel="noopener noreferrer">'
+      + "🏛 도서관에서 보기 <span aria-hidden=&quot;true&quot;>↗</span></a>"
+      + "</article>";
+  }
+
+  function renderBooks() {
+    var shown = state.books.filter(function (b) { return matchFilter(b) && matchQuery(b); });
+    $("bookList").innerHTML = shown.map(bookHTML).join("");
+    $("empty").hidden = shown.length !== 0;
+    $("listCount").textContent = shown.length + "권 표시 중 · 전체 " + state.books.length + "권";
+    Array.prototype.forEach.call($("bookList").querySelectorAll("[data-read]"), function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-read");
+        if (state.read[id]) { delete state.read[id]; toast("읽음 표시를 해제했어요"); }
+        else { state.read[id] = true; toast("읽음 완료로 표시했어요 🎉"); }
+        saveRead();
+        render();
+      });
+    });
+    Array.prototype.forEach.call($("bookList").querySelectorAll("[data-copy]"), function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-copy");
+        var book = null;
+        for (var i = 0; i < state.books.length; i++) {
+          if (state.books[i].id === id) { book = state.books[i]; break; }
+        }
+        if (!book) return;
+        copyThenToast(requestAction(book).text);
+      });
+    });
+  }
+
+  function render() { renderHero(); renderChips(); renderUpcoming(); renderBooks(); }
+
+  /* ---------------- data ---------------- */
+  function init(data) {
+    state.books = Array.isArray(data.books) ? data.books : [];
+    state.lastSyncedAt = data.lastSyncedAt || "";
+    state.read = loadRead();
+    render();
+    var d = new Date(state.lastSyncedAt);
+    var label = isNaN(d.getTime()) ? state.lastSyncedAt : (function () {
+      function p(n) { return (n < 10 ? "0" : "") + n; }
+      return d.getFullYear() + "." + p(d.getMonth() + 1) + "." + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+    })();
+    $("syncLine").textContent = "정약용도서관 · 마지막 동기화 " + label;
+    $("syncFine").textContent = label;
+    document.title = "📚 책 대시보드 · " + state.books.length + "권";
+  }
+
+  fetch("./books.json", { cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    .then(init)
+    .catch(function (e) {
+      $("listCount").textContent = "목록을 불러오지 못했어요";
+      var box = document.createElement("div");
+      box.className = "error";
+      box.textContent = "books.json을 불러오지 못했습니다 (" + e.message + "). "
+        + "같은 폴더에 books.json이 있는지 확인하거나, 배포된 주소(http://·https://)로 열어 주세요.";
+      $("bookList").parentNode.insertBefore(box, $("bookList"));
+    });
+
+  /* ---------------- events ---------------- */
+  function syncHeaderHeight() {
+    var h = document.querySelector("header").offsetHeight;
+    document.documentElement.style.setProperty("--headerH", h + "px");
+  }
+  syncHeaderHeight();
+  window.addEventListener("resize", syncHeaderHeight);
+  window.addEventListener("orientationchange", syncHeaderHeight);
+
+  $("searchInput").addEventListener("input", function (e) {
+    state.query = e.target.value.trim();
+    $("clearBtn").classList.toggle("is-on", state.query.length > 0);
+    renderBooks();
+  });
+  $("clearBtn").addEventListener("click", function () {
+    $("searchInput").value = "";
+    state.query = "";
+    $("clearBtn").classList.remove("is-on");
+    renderBooks();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".stat"), function (el) {
+    el.addEventListener("click", function () {
+      var jump = el.getAttribute("data-jump");
+      state.filter = state.filter === jump ? "all" : jump;
+      render();
+      var c = document.querySelector(".controls");
+      if (c && c.scrollIntoView) c.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  $("exportBtn").addEventListener("click", function () {
+    var payload = {
+      app: "library-board",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      read: state.read
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    var d = todayStamp().replace(/-/g, "");
+    a.href = url;
+    a.download = "reading-progress-" + d + ".json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    toast(Object.keys(state.read).length + "권 읽음 표시를 내보냈어요");
+  });
+
+  $("importBtn").addEventListener("click", function () { $("importFile").click(); });
+  $("importFile").addEventListener("change", function (e) {
+    var file = e.target.files && e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        var obj = JSON.parse(String(reader.result));
+        var incoming = obj && obj.read && typeof obj.read === "object" ? obj.read : obj;
+        if (!incoming || typeof incoming !== "object") throw new Error("형식이 달라요");
+        var ids = Object.keys(incoming).filter(function (k) { return incoming[k] === true; });
+        if (!confirm("읽음 표시 " + ids.length + "권을 불러옵니다.\n지금 화면의 표시는 이 내용으로 바뀝니다.")) return;
+        var next = {};
+        ids.forEach(function (id) { next[id] = true; });
+        state.read = next;
+        saveRead();
+        render();
+        toast(ids.length + "권 읽음 표시를 불러왔어요");
+      } catch (err) {
+        toast("파일을 읽지 못했어요: " + err.message);
+      } finally {
+        e.target.value = "";
+      }
+    };
+    reader.readAsText(file);
+  });
+})();
+</script>
+</body>
+</html>
