@@ -613,9 +613,12 @@
   function searchTitle(book) {
     return String(book.title).replace(/^\[CD\]/, "").trim();
   }
+  function libraryKeyword(book) {
+    return String(book.searchTitle || book.title).replace(/^\[CD\]/, "").trim();
+  }
   function libraryURL(book) {
     return "https://lib.nyj.go.kr/jyy/plusSearchResultList.do?searchType=SIMPLE&searchCategory=ALL"
-      + "&searchKey=ALL&searchKeyword=" + encodeURIComponent(searchTitle(book));
+      + "&searchKey=ALL&searchKeyword=" + encodeURIComponent(libraryKeyword(book));
   }
   function requestAction(book) {
     var t = searchTitle(book);

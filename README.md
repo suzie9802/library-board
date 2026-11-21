@@ -22,7 +22,7 @@
 ```
 index.html   앱 본체 (스타일·스크립트 포함, 외부 라이브러리 없음)
 books.json   도서 목록 + 정약용도서관 상태 + 표지 경로 + 마지막 동기화 시각
-covers/      도서 표지 이미지 15장 (가로 260px JPEG, 파일명 = 도서 id)
+covers/      도서 표지 이미지 (JPEG, 파일명 = 도서 id)
 .nojekyll    GitHub Pages에서 Jekyll 처리 생략
 ```
 
@@ -55,7 +55,9 @@ covers/      도서 표지 이미지 15장 (가로 260px JPEG, 파일명 = 도�
 }
 ```
 
-- `list`: `loan`(지금 대출) / `request`(요청한 책)
+- `list`: `loan`(지금 대출) / `request`(요청한 책) / `recommended`(추천·비치 목록)
+- `category`: 화면 검색에 쓰이는 분류 (예: `스토리텔 초1`, `초1 학교·교과`, `비문학·자연/동물`)
+- `searchTitle`(선택): 제목이 길어 도서관 검색이 안 될 때 ‘🏛 보기’가 대신 검색할 짧은 검색어
 - `status`와 배지 표시
 
 | `status` | 배지 | 추가로 쓰는 값 |
