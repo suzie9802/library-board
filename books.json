@@ -1,5 +1,5 @@
 {
-  "lastSyncedAt": "2026-11-22T08:41:24+09:00",
+  "lastSyncedAt": "2026-11-22T09:14:10+09:00",
   "source": "정약용도서관 (lib.nyj.go.kr)",
   "note": "정약용도서관 대출현황·예약현황·상호대차현황 및 자료검색 결과를 기준으로 정리한 목록입니다.",
   "books": [
@@ -16,7 +16,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-popcorn-shop.jpg"
+      "cover": "covers/loan-popcorn-shop.jpg",
+      "storytel": false
     },
     {
       "id": "loan-pony-mysteries",
@@ -31,7 +32,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-pony-mysteries.jpg"
+      "cover": "covers/loan-pony-mysteries.jpg",
+      "storytel": false
     },
     {
       "id": "loan-boy-named-boomer",
@@ -46,7 +48,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-boy-named-boomer.jpg"
+      "cover": "covers/loan-boy-named-boomer.jpg",
+      "storytel": false
     },
     {
       "id": "loan-haetsal-annyeong",
@@ -61,7 +64,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-haetsal-annyeong.jpg"
+      "cover": "covers/loan-haetsal-annyeong.jpg",
+      "storytel": false
     },
     {
       "id": "loan-walt-disney-cd",
@@ -76,7 +80,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-walt-disney-cd.jpg"
+      "cover": "covers/loan-walt-disney-cd.jpg",
+      "storytel": false
     },
     {
       "id": "loan-ne-neukkim",
@@ -91,7 +96,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-ne-neukkim.jpg"
+      "cover": "covers/loan-ne-neukkim.jpg",
+      "storytel": false
     },
     {
       "id": "loan-don-namu",
@@ -106,7 +112,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-don-namu.jpg"
+      "cover": "covers/loan-don-namu.jpg",
+      "storytel": false
     },
     {
       "id": "loan-duri-hamkke",
@@ -121,7 +128,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-duri-hamkke.jpg"
+      "cover": "covers/loan-duri-hamkke.jpg",
+      "storytel": false
     },
     {
       "id": "loan-walt-disney",
@@ -136,7 +144,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-walt-disney.jpg"
+      "cover": "covers/loan-walt-disney.jpg",
+      "storytel": false
     },
     {
       "id": "loan-yaedeul-hakgyo",
@@ -151,7 +160,8 @@
       "status": "borrowed",
       "borrowedAt": "2026-11-15",
       "dueDate": "2026-11-29",
-      "cover": "covers/loan-yaedeul-hakgyo.jpg"
+      "cover": "covers/loan-yaedeul-hakgyo.jpg",
+      "storytel": false
     },
     {
       "id": "req-dapanda-3",
@@ -168,7 +178,8 @@
       "reserveRank": 2,
       "reserveQueue": 2,
       "dueDate": "2026-11-22",
-      "cover": "covers/req-dapanda-3.jpg"
+      "cover": "covers/req-dapanda-3.jpg",
+      "storytel": false
     },
     {
       "id": "req-oegyein",
@@ -185,7 +196,8 @@
       "illFrom": "오남도서관",
       "illTo": "정약용도서관",
       "illState": "발송",
-      "cover": "covers/req-oegyein.jpg"
+      "cover": "covers/req-oegyein.jpg",
+      "storytel": true
     },
     {
       "id": "req-nae-cake",
@@ -198,7 +210,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 808.9-북17꿈-87",
       "status": "available",
-      "cover": "covers/req-nae-cake.jpg"
+      "cover": "covers/req-nae-cake.jpg",
+      "storytel": false
     },
     {
       "id": "req-ttokttok-1",
@@ -211,7 +224,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 375.2-문94똑",
       "status": "available",
-      "cover": "covers/req-ttokttok-1.jpg"
+      "cover": "covers/req-ttokttok-1.jpg",
+      "storytel": false
     },
     {
       "id": "req-ddong-naemsae",
@@ -225,7 +239,8 @@
       "callNo": "",
       "status": "notheld",
       "isbn": "9791175140325",
-      "cover": "covers/req-ddong-naemsae.jpg"
+      "cover": "covers/req-ddong-naemsae.jpg",
+      "storytel": false
     },
     {
       "id": "rec-01",
@@ -239,7 +254,8 @@
       "callNo": "유아 813.8-안194복",
       "status": "loaned_other",
       "cover": "covers/rec-01.jpg",
-      "dueDate": "2026-11-30"
+      "dueDate": "2026-11-30",
+      "storytel": false
     },
     {
       "id": "rec-02",
@@ -253,7 +269,8 @@
       "callNo": "유아 813.8-백97구",
       "status": "loaned_other",
       "cover": "covers/rec-02.jpg",
-      "dueDate": "2026-11-27"
+      "dueDate": "2026-11-27",
+      "storytel": false
     },
     {
       "id": "rec-03",
@@ -267,7 +284,8 @@
       "callNo": "유아 808.9-사14그-149",
       "status": "loaned_other",
       "cover": "covers/rec-03.jpg",
-      "dueDate": "2026-11-27"
+      "dueDate": "2026-11-27",
+      "storytel": false
     },
     {
       "id": "rec-04",
@@ -280,7 +298,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/rec-04.jpg"
+      "cover": "covers/rec-04.jpg",
+      "storytel": false
     },
     {
       "id": "rec-05",
@@ -294,7 +313,8 @@
       "callNo": "유아 808.9-길44두-116",
       "status": "loaned_other",
       "cover": "covers/rec-05.jpg",
-      "dueDate": "2026-11-23"
+      "dueDate": "2026-11-23",
+      "storytel": false
     },
     {
       "id": "rec-06",
@@ -307,7 +327,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/rec-06.jpg"
+      "cover": "covers/rec-06.jpg",
+      "storytel": false
     },
     {
       "id": "rec-07",
@@ -321,7 +342,8 @@
       "callNo": "유아 808.9-키22키-72",
       "status": "loaned_other",
       "cover": "covers/rec-07.jpg",
-      "dueDate": "2026-12-02"
+      "dueDate": "2026-12-02",
+      "storytel": false
     },
     {
       "id": "rec-08",
@@ -334,7 +356,8 @@
       "shelf": "오디오북",
       "callNo": "오디오북 813.8-별22브",
       "status": "available",
-      "cover": "covers/rec-08.jpg"
+      "cover": "covers/rec-08.jpg",
+      "storytel": true
     },
     {
       "id": "rec-09",
@@ -347,7 +370,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/rec-09.jpg"
+      "cover": "covers/rec-09.jpg",
+      "storytel": false
     },
     {
       "id": "rec-10",
@@ -361,7 +385,8 @@
       "callNo": "아동 183.2-손66마",
       "status": "loaned_other",
       "cover": "covers/rec-10.jpg",
-      "dueDate": "2026-11-21"
+      "dueDate": "2026-11-21",
+      "storytel": false
     },
     {
       "id": "rec-11",
@@ -374,7 +399,8 @@
       "shelf": "ㅎ정약용보존(도농대출-아동)",
       "callNo": "유아 808.9-스875창-7",
       "status": "available",
-      "cover": "covers/rec-11.jpg"
+      "cover": "covers/rec-11.jpg",
+      "storytel": false
     },
     {
       "id": "rec-12",
@@ -388,7 +414,8 @@
       "callNo": "유아 813.8-정36나",
       "status": "loaned_other",
       "cover": "covers/rec-12.jpg",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "storytel": false
     },
     {
       "id": "rec-13",
@@ -401,7 +428,8 @@
       "shelf": "전자도서관",
       "callNo": "전자 833.8-노46내",
       "status": "available",
-      "cover": "covers/rec-13.jpg"
+      "cover": "covers/rec-13.jpg",
+      "storytel": false
     },
     {
       "id": "rec-14",
@@ -414,7 +442,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 813.8-김64어",
       "status": "available",
-      "cover": "covers/rec-14.jpg"
+      "cover": "covers/rec-14.jpg",
+      "storytel": false
     },
     {
       "id": "rec-15",
@@ -428,7 +457,8 @@
       "callNo": "유아 808.9-책68작-72",
       "status": "loaned_other",
       "cover": "covers/rec-15.jpg",
-      "dueDate": "2026-11-23"
+      "dueDate": "2026-11-23",
+      "storytel": false
     },
     {
       "id": "rec-16",
@@ -442,7 +472,8 @@
       "callNo": "유아 808.9-길44두-53",
       "status": "loaned_other",
       "cover": "covers/rec-16.jpg",
-      "dueDate": "2026-11-24"
+      "dueDate": "2026-11-24",
+      "storytel": false
     },
     {
       "id": "rec-17",
@@ -455,7 +486,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "813.8-안194수",
       "status": "available",
-      "cover": "covers/rec-17.jpg"
+      "cover": "covers/rec-17.jpg",
+      "storytel": false
     },
     {
       "id": "rec-18",
@@ -469,7 +501,8 @@
       "callNo": "유아 813.8-안194당",
       "status": "loaned_other",
       "cover": "covers/rec-18.jpg",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "storytel": false
     },
     {
       "id": "rec-19",
@@ -483,7 +516,8 @@
       "callNo": "유아 813.8-안194별",
       "status": "loaned_other",
       "cover": "covers/rec-19.jpg",
-      "dueDate": "2026-12-02"
+      "dueDate": "2026-12-02",
+      "storytel": false
     },
     {
       "id": "rec-20",
@@ -496,7 +530,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 813.8-백97알",
       "status": "available",
-      "cover": "covers/rec-20.jpg"
+      "cover": "covers/rec-20.jpg",
+      "storytel": false
     },
     {
       "id": "rec-21",
@@ -509,7 +544,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "808.9-책68그-7",
       "status": "available",
-      "cover": "covers/rec-21.jpg"
+      "cover": "covers/rec-21.jpg",
+      "storytel": false
     },
     {
       "id": "rec-22",
@@ -523,7 +559,8 @@
       "callNo": "유아 808.9-책68그-19",
       "status": "loaned_other",
       "cover": "covers/rec-22.jpg",
-      "dueDate": "2026-11-30"
+      "dueDate": "2026-11-30",
+      "storytel": false
     },
     {
       "id": "rec-23",
@@ -537,7 +574,8 @@
       "callNo": "유아 813.8-한55구-15",
       "status": "loaned_other",
       "cover": "covers/rec-23.jpg",
-      "dueDate": "2026-11-23"
+      "dueDate": "2026-11-23",
+      "storytel": false
     },
     {
       "id": "rec-24",
@@ -550,7 +588,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 813.8-이78팥",
       "status": "available",
-      "cover": "covers/rec-24.jpg"
+      "cover": "covers/rec-24.jpg",
+      "storytel": false
     },
     {
       "id": "rec-25",
@@ -563,7 +602,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 808.9-웅78모-50=3",
       "status": "available",
-      "cover": "covers/rec-25.jpg"
+      "cover": "covers/rec-25.jpg",
+      "storytel": false
     },
     {
       "id": "rec-26",
@@ -577,7 +617,8 @@
       "callNo": "유아 813.8-이78이=3",
       "status": "loaned_other",
       "cover": "covers/rec-26.jpg",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "storytel": false
     },
     {
       "id": "rec-27",
@@ -590,7 +631,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 813.8-전73왔-4",
       "status": "available",
-      "cover": "covers/rec-27.jpg"
+      "cover": "covers/rec-27.jpg",
+      "storytel": false
     },
     {
       "id": "rec-28",
@@ -604,7 +646,8 @@
       "callNo": "유아 808.9-웅78아-107",
       "status": "loaned_other",
       "cover": "covers/rec-28.jpg",
-      "dueDate": "2026-11-22"
+      "dueDate": "2026-11-22",
+      "storytel": false
     },
     {
       "id": "rec-29",
@@ -617,7 +660,8 @@
       "shelf": "ㅎ정약용보존(도농대출-아동)",
       "callNo": "유아 833.8-마878틀=2",
       "status": "available",
-      "cover": "covers/rec-29.jpg"
+      "cover": "covers/rec-29.jpg",
+      "storytel": false
     },
     {
       "id": "rec-30",
@@ -631,7 +675,8 @@
       "callNo": "유아 808.9-웅78아-109",
       "status": "loaned_other",
       "cover": "covers/rec-30.jpg",
-      "dueDate": "2026-11-22"
+      "dueDate": "2026-11-22",
+      "storytel": false
     },
     {
       "id": "rec-31",
@@ -644,7 +689,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 334.225-박74성-1",
       "status": "available",
-      "cover": "covers/rec-31.jpg"
+      "cover": "covers/rec-31.jpg",
+      "storytel": false
     },
     {
       "id": "rec-32",
@@ -657,7 +703,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 181.7-박54아-1",
       "status": "available",
-      "cover": "covers/rec-32.jpg"
+      "cover": "covers/rec-32.jpg",
+      "storytel": false
     },
     {
       "id": "rec-33",
@@ -670,7 +717,8 @@
       "shelf": "ㅎ정약용보존(도농대출-아동)",
       "callNo": "유아 808.9-시15네-220",
       "status": "available",
-      "cover": "covers/rec-33.jpg"
+      "cover": "covers/rec-33.jpg",
+      "storytel": false
     },
     {
       "id": "rec-34",
@@ -683,7 +731,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 808.9-웅78세-1",
       "status": "loaned_other",
-      "cover": "covers/rec-34.jpg"
+      "cover": "covers/rec-34.jpg",
+      "storytel": false
     },
     {
       "id": "rec-35",
@@ -696,7 +745,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 833.8-사885달",
       "status": "available",
-      "cover": "covers/rec-35.jpg"
+      "cover": "covers/rec-35.jpg",
+      "storytel": false
     },
     {
       "id": "rec-36",
@@ -709,7 +759,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 853-비64책-1",
       "status": "available",
-      "cover": "covers/rec-36.jpg"
+      "cover": "covers/rec-36.jpg",
+      "storytel": false
     },
     {
       "id": "rec-37",
@@ -722,7 +773,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 808.9-사14초-20",
       "status": "available",
-      "cover": "covers/rec-37.jpg"
+      "cover": "covers/rec-37.jpg",
+      "storytel": false
     },
     {
       "id": "rec-38",
@@ -736,7 +788,8 @@
       "callNo": "유아 808.9-토885토-4",
       "status": "loaned_other",
       "cover": "covers/rec-38.jpg",
-      "dueDate": "2026-11-23"
+      "dueDate": "2026-11-23",
+      "storytel": false
     },
     {
       "id": "rec-39",
@@ -750,7 +803,8 @@
       "callNo": "유아 808.9-주198베-20",
       "status": "loaned_other",
       "cover": "covers/rec-39.jpg",
-      "dueDate": "2026-11-21"
+      "dueDate": "2026-11-21",
+      "storytel": false
     },
     {
       "id": "rec-40",
@@ -764,7 +818,8 @@
       "callNo": "유아 833.8-이65백-6",
       "status": "loaned_other",
       "cover": "covers/rec-40.jpg",
-      "dueDate": "2026-11-15"
+      "dueDate": "2026-11-15",
+      "storytel": false
     },
     {
       "id": "rec-41",
@@ -777,7 +832,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/rec-41.jpg"
+      "cover": "covers/rec-41.jpg",
+      "storytel": false
     },
     {
       "id": "rec-42",
@@ -790,7 +846,8 @@
       "shelf": "ㅎ정약용보존(도농대출-아동)",
       "callNo": "아동 808.9-주198초-3",
       "status": "available",
-      "cover": "covers/rec-42.jpg"
+      "cover": "covers/rec-42.jpg",
+      "storytel": false
     },
     {
       "id": "rec-43",
@@ -803,7 +860,8 @@
       "shelf": "ㅎ정약용보존(도농대출-아동)",
       "callNo": "아동 808.9-주198초-6",
       "status": "available",
-      "cover": "covers/rec-43.jpg"
+      "cover": "covers/rec-43.jpg",
+      "storytel": false
     },
     {
       "id": "rec-44",
@@ -817,7 +875,8 @@
       "callNo": "유아 808.9-책68그-98",
       "status": "loaned_other",
       "cover": "covers/rec-44.jpg",
-      "dueDate": "2026-11-28"
+      "dueDate": "2026-11-28",
+      "storytel": false
     },
     {
       "id": "rec-45",
@@ -831,7 +890,8 @@
       "callNo": "유아 808.9-세65세-2",
       "status": "loaned_other",
       "cover": "covers/rec-45.jpg",
-      "dueDate": "2026-11-29"
+      "dueDate": "2026-11-29",
+      "storytel": false
     },
     {
       "id": "rec-46",
@@ -845,7 +905,8 @@
       "callNo": "아동 980-발872너",
       "status": "loaned_other",
       "cover": "covers/rec-46.jpg",
-      "dueDate": "2026-11-24"
+      "dueDate": "2026-11-24",
+      "storytel": false
     },
     {
       "id": "rec-47",
@@ -858,7 +919,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/rec-47.jpg"
+      "cover": "covers/rec-47.jpg",
+      "storytel": false
     },
     {
       "id": "rec-48",
@@ -871,7 +933,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "유아 813.8-김95나",
       "status": "available",
-      "cover": "covers/rec-48.jpg"
+      "cover": "covers/rec-48.jpg",
+      "storytel": false
     },
     {
       "id": "rec-49",
@@ -884,7 +947,8 @@
       "shelf": "ㅎ정약용보존(도농대출-아동)",
       "callNo": "유아 388.311-오295비-28",
       "status": "available",
-      "cover": "covers/rec-49.jpg"
+      "cover": "covers/rec-49.jpg",
+      "storytel": false
     },
     {
       "id": "rec-50",
@@ -897,7 +961,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "388.311-비295전-3",
       "status": "available",
-      "cover": "covers/rec-50.jpg"
+      "cover": "covers/rec-50.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-01",
@@ -911,7 +976,8 @@
       "callNo": "아동 404-정66과",
       "status": "loaned_other",
       "cover": "covers/nonfic-01.jpg",
-      "dueDate": "2026-11-28"
+      "dueDate": "2026-11-28",
+      "storytel": false
     },
     {
       "id": "nonfic-02",
@@ -924,7 +990,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 404-원75엉-3",
       "status": "available",
-      "cover": "covers/nonfic-02.jpg"
+      "cover": "covers/nonfic-02.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-03",
@@ -937,7 +1004,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 410-남95황-4",
       "status": "available",
-      "cover": "covers/nonfic-03.jpg"
+      "cover": "covers/nonfic-03.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-04",
@@ -950,7 +1018,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/nonfic-04.jpg"
+      "cover": "covers/nonfic-04.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-05",
@@ -963,7 +1032,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 998.4-김54상",
       "status": "available",
-      "cover": "covers/nonfic-05.jpg"
+      "cover": "covers/nonfic-05.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-06",
@@ -976,7 +1046,8 @@
       "shelf": "정약용 전자도서관",
       "callNo": "전자 430-이74우",
       "status": "available",
-      "cover": "covers/nonfic-06.jpg"
+      "cover": "covers/nonfic-06.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-07",
@@ -989,7 +1060,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/nonfic-07.jpg"
+      "cover": "covers/nonfic-07.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-08",
@@ -1002,7 +1074,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 491-이32어",
       "status": "available",
-      "cover": "covers/nonfic-08.jpg"
+      "cover": "covers/nonfic-08.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-09",
@@ -1015,7 +1088,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 472-황94최-2",
       "status": "available",
-      "cover": "covers/nonfic-09.jpg"
+      "cover": "covers/nonfic-09.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-10",
@@ -1028,7 +1102,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/nonfic-10.jpg"
+      "cover": "covers/nonfic-10.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-11",
@@ -1041,7 +1116,8 @@
       "shelf": "정약용(1층)어린이자료실(교과연계코너)",
       "callNo": "유아 495-스894난",
       "status": "available",
-      "cover": "covers/nonfic-11.jpg"
+      "cover": "covers/nonfic-11.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-12",
@@ -1054,7 +1130,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 082-사14초-21",
       "status": "available",
-      "cover": "covers/nonfic-12.jpg"
+      "cover": "covers/nonfic-12.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-13",
@@ -1067,7 +1144,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 031-키22똑-17",
       "status": "available",
-      "cover": "covers/nonfic-13.jpg"
+      "cover": "covers/nonfic-13.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-14",
@@ -1080,7 +1158,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 082-어57초-12",
       "status": "available",
-      "cover": "covers/nonfic-14.jpg"
+      "cover": "covers/nonfic-14.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-15",
@@ -1093,7 +1172,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/nonfic-15.jpg"
+      "cover": "covers/nonfic-15.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-16",
@@ -1106,7 +1186,8 @@
       "shelf": "남양주시 도서관 전체",
       "callNo": "",
       "status": "notheld",
-      "cover": "covers/nonfic-16.jpg"
+      "cover": "covers/nonfic-16.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-17",
@@ -1119,7 +1200,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 344-슐34나",
       "status": "available",
-      "cover": "covers/nonfic-17.jpg"
+      "cover": "covers/nonfic-17.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-18",
@@ -1133,7 +1215,8 @@
       "callNo": "아동 320-정78자-2",
       "status": "loaned_other",
       "cover": "covers/nonfic-18.jpg",
-      "dueDate": "2026-11-21"
+      "dueDate": "2026-11-21",
+      "storytel": false
     },
     {
       "id": "nonfic-19",
@@ -1146,7 +1229,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 539-송56오",
       "status": "available",
-      "cover": "covers/nonfic-19.jpg"
+      "cover": "covers/nonfic-19.jpg",
+      "storytel": false
     },
     {
       "id": "nonfic-20",
@@ -1159,7 +1243,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 609-국38걸-11",
       "status": "available",
-      "cover": "covers/nonfic-20.jpg"
+      "cover": "covers/nonfic-20.jpg",
+      "storytel": false
     },
     {
       "id": "storytel-01",
@@ -1172,7 +1257,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 813.8-다52씽-1",
       "status": "available",
-      "cover": "covers/storytel-01.jpg"
+      "cover": "covers/storytel-01.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-02",
@@ -1185,7 +1271,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 813.8-북34북-47",
       "status": "available",
-      "cover": "covers/storytel-02.jpg"
+      "cover": "covers/storytel-02.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-03",
@@ -1198,7 +1285,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 813.8-소66소-17",
       "status": "available",
-      "cover": "covers/storytel-03.jpg"
+      "cover": "covers/storytel-03.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-04",
@@ -1211,7 +1299,8 @@
       "shelf": "정약용(1층)어린이자료실(교과연계코너)",
       "callNo": "아동 813.8-잇85저-13=2",
       "status": "available",
-      "cover": "covers/storytel-04.jpg"
+      "cover": "covers/storytel-04.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-05",
@@ -1225,7 +1314,8 @@
       "callNo": "아동 813.8-홍38낭-3",
       "status": "available",
       "searchTitle": "낭만 강아지 봉봉",
-      "cover": "covers/storytel-05.jpg"
+      "cover": "covers/storytel-05.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-06",
@@ -1239,7 +1329,8 @@
       "callNo": "아동 813.8-김65도-5",
       "status": "available",
       "searchTitle": "신기한 맛 도깨비 식당",
-      "cover": "covers/storytel-06.jpg"
+      "cover": "covers/storytel-06.jpg",
+      "storytel": false
     },
     {
       "id": "storytel-07",
@@ -1252,7 +1343,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "813.8-웅78우-6",
       "status": "available",
-      "cover": "covers/storytel-07.jpg"
+      "cover": "covers/storytel-07.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-08",
@@ -1266,7 +1358,8 @@
       "callNo": "아동 833.8-히295이-9",
       "status": "available",
       "searchTitle": "이상한 과자 가게 전천당",
-      "cover": "covers/storytel-08.jpg"
+      "cover": "covers/storytel-08.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-09",
@@ -1279,7 +1372,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "813.8-국38우-18",
       "status": "available",
-      "cover": "covers/storytel-09.jpg"
+      "cover": "covers/storytel-09.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-10",
@@ -1292,7 +1386,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "813.8-웅78우-8",
       "status": "available",
-      "cover": "covers/storytel-10.jpg"
+      "cover": "covers/storytel-10.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-11",
@@ -1306,7 +1401,8 @@
       "callNo": "아동 813.8-채66일-12",
       "status": "available",
       "searchTitle": "자두의 호기심 일기장",
-      "cover": "covers/storytel-11.jpg"
+      "cover": "covers/storytel-11.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-12",
@@ -1320,7 +1416,8 @@
       "callNo": "813.8-국38우-5",
       "status": "available",
       "searchTitle": "맛있는 구름 콩",
-      "cover": "covers/storytel-12.jpg"
+      "cover": "covers/storytel-12.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-13",
@@ -1333,7 +1430,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 813.8-살298오-11",
       "status": "available",
-      "cover": "covers/storytel-13.jpg"
+      "cover": "covers/storytel-13.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-14",
@@ -1346,7 +1444,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 813.8-한55저-7",
       "status": "available",
-      "cover": "covers/storytel-14.jpg"
+      "cover": "covers/storytel-14.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-15",
@@ -1359,7 +1458,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 813.8-고74학",
       "status": "available",
-      "cover": "covers/storytel-15.jpg"
+      "cover": "covers/storytel-15.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-16",
@@ -1372,7 +1472,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 808.9-시15꾸-1",
       "status": "available",
-      "cover": "covers/storytel-16.jpg"
+      "cover": "covers/storytel-16.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-17",
@@ -1386,7 +1487,8 @@
       "callNo": "아동 813.8-이67황",
       "status": "available",
       "searchTitle": "황금나무 숲",
-      "cover": "covers/storytel-17.jpg"
+      "cover": "covers/storytel-17.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-18",
@@ -1399,7 +1501,8 @@
       "shelf": "정약용(1층)유아자료실",
       "callNo": "유아 808.9-시15우-48",
       "status": "available",
-      "cover": "covers/storytel-18.jpg"
+      "cover": "covers/storytel-18.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-19",
@@ -1412,7 +1515,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "388.311-시15우-18",
       "status": "available",
-      "cover": "covers/storytel-19.jpg"
+      "cover": "covers/storytel-19.jpg",
+      "storytel": true
     },
     {
       "id": "storytel-20",
@@ -1425,7 +1529,8 @@
       "shelf": "정약용(1층)어린이자료실",
       "callNo": "아동 813.7-김294아",
       "status": "available",
-      "cover": "covers/storytel-20.jpg"
+      "cover": "covers/storytel-20.jpg",
+      "storytel": true
     }
   ]
 }

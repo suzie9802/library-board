@@ -24,6 +24,7 @@
     --violet: #6d28d9; --violet-bg: #f3eeff;
     --green: #15803d;  --green-bg: #eafaf0;
     --red: #b91c1c;    --red-bg: #fdeeee;
+    --teal: #0e7490;   --teal-bg: #e2f4f9;
     --shadow: 0 1px 2px rgba(31,36,48,.05), 0 6px 16px rgba(31,36,48,.05);
     --radius: 16px;
   }
@@ -205,6 +206,8 @@
   .badge.ill      { color: var(--violet); background: var(--violet-bg); }
   .badge.available{ color: var(--green);  background: var(--green-bg); }
   .badge.notheld  { color: var(--red);    background: var(--red-bg); }
+  .badge.storytel { color: var(--teal);   background: var(--teal-bg); }
+  .badges { flex: 0 0 auto; display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; max-width: 50%; }
 
   .meta {
     margin: 0; font-size: 10px; color: var(--ink-faint); line-height: 1.32; letter-spacing: -.01em;
@@ -374,6 +377,7 @@
       <b>데이터</b> 정약용도서관(lib.nyj.go.kr) 대출·예약·상호대차 현황에서 정리한 목록입니다.
       마지막 동기화 <span id="syncFine">-</span>.<br>
       <b>표지</b> 실제 도서 표지 이미지를 ‘표지’ 폴더에 저장해 함께 배포합니다. 표지가 없는 책은 제목 카드로 대신 보여 줍니다.<br>
+      <b>🎧 스토리텔</b> 스토리텔(storytel.com/kr)에서 오디오북으로 들을 수 있는 책에 붙는 표시입니다(2026-11-22 확인). 필터 칩이나 검색창에 ‘스토리텔’을 입력해 모아 볼 수 있습니다.<br>
       <b>도서 카드</b> ‘보기’는 정약용도서관 검색 결과를 새 창으로 열고, ‘복사’ 버튼은 채팅창에 붙여넣어 요청할 문장을 복사합니다.<br>
       <b>읽음 표시</b> 이 기기의 브라우저 저장소에만 저장되며 어디로도 전송되지 않습니다.
       폰을 바꾸실 때는 내보내기 파일을 새 기기에서 불러오시면 됩니다.<br>
@@ -398,6 +402,7 @@
   };
   var FILTERS = [
     { key: "all",       label: "전체" },
+    { key: "storytel",  label: "🎧 스토리텔" },
     { key: "borrowed",  label: "📖 빌리는 중" },
     { key: "waiting",   label: "⏳ 예약·상호대차" },
     { key: "available", label: "✅ 비치중" },
@@ -483,6 +488,13 @@
     return '<span class="badge ' + esc(book.status) + '" title="' + esc(badgeTitle(book)) + '">'
       + esc(badgeText(book)) + "</span>";
   }
+  function storytelHTML(book) {
+    if (book.storytel !== true) return "";
+    return '<span class="badge storytel" title="스토리텔(storytel.com/kr)에서 오디오북으로 들을 수 있어요">🎧 스토리텔</span>';
+  }
+  function badgesHTML(book) {
+    return '<div class="badges">' + badgeHTML(book) + storytelHTML(book) + "</div>";
+  }
 
   function metaLine(book) {
     var bits = [];
@@ -503,9 +515,10 @@
 
   /* ---------------- render ---------------- */
   function counts() {
-    var c = { all: 0, borrowed: 0, waiting: 0, available: 0, notheld: 0, read: 0 };
+    var c = { all: 0, storytel: 0, borrowed: 0, waiting: 0, available: 0, notheld: 0, read: 0 };
     state.books.forEach(function (b) {
       c.all++;
+      if (b.storytel === true) c.storytel++;
       if (isRead(b)) c.read++;
       if (b.status === "borrowed") c.borrowed++;
       if (isWaiting(b)) c.waiting++;
@@ -533,7 +546,7 @@
   function renderChips() {
     var c = counts();
     var html = FILTERS.map(function (f) {
-      var n = c[f.key === "waiting" ? "waiting" : f.key];
+      var n = c[f.key];
       return '<button class="chip' + (state.filter === f.key ? " is-on" : "") + '" type="button" role="tab" '
         + 'aria-selected="' + (state.filter === f.key) + '" data-filter="' + f.key + '">'
         + esc(f.label) + "<b>" + n + "</b></button>";
@@ -598,12 +611,14 @@
   function matchQuery(b) {
     if (!state.query) return true;
     var q = state.query.toLowerCase();
-    return (b.title + " " + b.author + " " + (b.category || "") + " " + (b.publisher || ""))
-      .toLowerCase().indexOf(q) !== -1;
+    var hay = b.title + " " + b.author + " " + (b.category || "") + " " + (b.publisher || "");
+    if (b.storytel === true) hay += " 스토리텔 storytel 오디오북";
+    return hay.toLowerCase().indexOf(q) !== -1;
   }
   function matchFilter(b) {
     var f = state.filter;
     if (f === "all") return true;
+    if (f === "storytel") return b.storytel === true;
     if (f === "read") return isRead(b);
     if (f === "waiting") return isWaiting(b);
     return b.status === f;
@@ -681,7 +696,8 @@
     return '<article class="book' + (read ? " read" : "") + '" data-id="' + esc(b.id) + '">'
       + coverHTML(b)
       + '<div class="body">'
-      +   '<div class="title-row"><h3>' + esc(b.title) + "</h3>" + badgeHTML(b) + "</div>"
+      +   '<div class="title-row"><h3>' + esc(b.title) + "</h3>" + badgesHTML(b) + "</div>"
+
       +   '<p class="meta" title="' + esc(b.title + " · " + metaLine(b)) + '">' + esc(metaLine(b)) + "</p>"
       +   shelfLocHTML(b)
       +   '<div class="foot">'
