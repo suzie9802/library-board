@@ -611,6 +611,7 @@
   function matchQuery(b) {
     if (!state.query) return true;
     var q = state.query.toLowerCase();
+    if (q === "스토리텔" || q === "storytel") return b.storytel === true;
     var hay = b.title + " " + b.author + " " + (b.category || "") + " " + (b.publisher || "");
     if (b.storytel === true) hay += " 스토리텔 storytel 오디오북";
     return hay.toLowerCase().indexOf(q) !== -1;
